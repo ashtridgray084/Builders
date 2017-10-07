@@ -174,7 +174,7 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
 
     }
 
-    }
+    
 
     $scope.cancelEdit = function(){
        $scope.activepage = 'main';

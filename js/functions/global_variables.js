@@ -1,4 +1,4 @@
 /*** General Global Variable ***/
-var rootURL = "/Aa/wemis/api/public";
+var rootURL = "/NDM/Builders/api/public";
 /*** Login Part ***/
-var indexURL = "/Aa/wemis";
+var indexURL = "/NDM/Builders";
