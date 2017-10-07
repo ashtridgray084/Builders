@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ndmApp">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>NDM Builders</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css"  href="css/loader.css" >
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <!-- <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Oxygen:400,700">
+    <!-- <script charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+    <!-- <script charset="utf-8" src="//cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"></script> -->
+    <!-- <script charset="utf-8" src="webapp.js"></script> -->
+    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+    <!--  jQuery -->
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+    <!-- AngularJS -->
+    <script src="angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="angularjs/1.4.8/angular-route.js"></script> 
+    <!-- <script type="text/javascript" src="angularjs/1.4.8/angular-validation-match.js"></script> -->
+
+    <script>
+      var ndmApp = angular.module('ndmApp', ['ngRoute','angularUtils.directives.dirPagination']);
+    // configure our routes
+      ndmApp.config(function($routeProvider) {
+        $routeProvider
+        
+        .when('/', {
+          templateUrl : 'angularjs/views/memberinfo.html',
+          controller : 'mainCtrl'
+        })
+        .when('/attendance', {
+          templateUrl : 'angularjs/views/attendance.html',
+          controller : 'attendCtrl'
+          })
+        .when('/schedule', {
+          templateUrl : 'angularjs/views/schedule.html',
+          controller : 'adminCtrl'
+          })
+        .when('/salary', {
+          templateUrl : 'angularjs/views/salary.html',
+          controller : 'adminCtrl'
+          })
+        .when('/userSettings', {
+          templateUrl : 'angularjs/views/userSettings.html',
+          controller : 'adminCtrl'
+          })
+        .when('/attendMonitor', {
+          templateUrl : 'angularjs/views/attendMonitor.html',
+          controller : 'adminCtrl'
+          })
+        .when('/deptSched', {
+          templateUrl : 'angularjs/views/deptSched.html',
+          controller : 'adminCtrl'
+          })
+        .when('/payroll', {
+          templateUrl : 'angularjs/views/payroll.html',
+          controller : 'adminCtrl'
+          })
+      });
+    </script>
+
+  </head>
+
+  <body class="fixed-nav bg-dark" id="page-top" ng-controller="mainCtrl">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#"><i class="fa fa-home"></i> NDM Builders</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="nav navbar-nav navbar-sidenav">
+        <br/>
+          <li class="nav-item" ng-show="memberinfo_mgt==1" data-toggle="tooltip" data-placement="right" title="Member Info">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMemberInfo" data-parent="#exampleAccordion">
+              <i class="fa fa-fw fa-users"></i>
+              <span class="nav-link-text">
+                Member Information</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseMemberInfo">
+              <li>
+                <a href="#/">Profile</a>
+              </li>
+              <li ng-if="usertype=='Admin'">
+                <a href="#/userSettings">Member Settings</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item" ng-show="attendance_mgt==1" data-toggle="tooltip" data-placement="right" title="Attendance">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAttendance" data-parent="#exampleAccordion">
+              <i class="fa fa-fw fa-book"></i>
+              <span class="nav-link-text">
+                Attendance</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseAttendance">
+              <li>
+                <a href="#/attendance">Daily Attendance</a>
+              </li>
+              <li ng-if="usertype=='Admin'">
+                <a href="#/attendMonitor">Monitored Attendance</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item" ng-show="schedule_mgt==1" data-toggle="tooltip" data-placement="right" title="Schedules">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSchedule" data-parent="#exampleAccordion">
+              <i class="fa fa-fw fa-book"></i>
+              <span class="nav-link-text">
+                Schedule</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseSchedule">
+              <li>
+                <a href="#/schedule">My Schedule</a>
+              </li>
+              <li ng-if="usertype=='Admin' || usertype=='Engineer'">
+                <a href="#/deptSched">Department Schedule</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item" ng-show="salary_mgt==1" data-toggle="tooltip" data-placement="right" title="Schedules">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSalary" data-parent="#exampleAccordion">
+              <i class="fa fa-fw fa-book"></i>
+              <span class="nav-link-text">
+                Salary</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseSalary">
+              <li>
+                <a href="#/salary">Payslip</a>
+              </li>
+              <li ng-if="usertype=='Admin'">
+                <a href="#/payroll">Payroll</a>
+              </li>
+            </ul>
+          </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+          <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown pull-right">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-fw fa-user"></i>
+          <span class="nav-link-text username" id="username"></span>
+          </a>
+          
+          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+            <!-- <a class="dropdown-item fa fa-users" ng-if="usertype=='Admin'" id="p5" href="#/userSettings">
+              <strong>Member Settings</strong>
+              <div class="dropdown-divider"></div>
+            </a>
+           
+            <a class="dropdown-item fa fa-cog" ng-if="usertype=='Admin'" id="p6" href="#/accessSettings">
+              <strong>Access Settings</strong>
+              <div class="dropdown-divider"></div>
+            </a> -->
+            <a class="dropdown-item fa fa-info-circle" data-toggle="modal" data-target="#aboutUs">
+              <strong>About Us</strong>
+            </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <i class="fa fa-fw fa-sign-out"></i>
+          Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="content-wrapper">
+    <div class="main-content" id="" >
+      <div ng-view></div>
+    </div>
+
+    <!-- Loader Display -->
+    <div class="loading" ng-if="loader">Loading&#8230;</div>
+
+  </div>
+  
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Select "Logout" below if you are ready to end your current session.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <div class="modal fade" id="aboutUs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">About Us</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" >
+            <div class="panel" style="border-color: blue; border: 1px;">
+              Web-based Employee Information System <br/>
+            <label class="text-center"><b>Members:</b></label> <br/>
+            <label class="text-center">J1</label> <br/>
+            <label class="text-center">J2</label> <br/>
+            <label class="text-center">J3</label> <br/>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            <!-- <a class="btn btn-primary" href="login.html">OK</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+<footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright &copy; NDM Builders 2017</small>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <!-- <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a> -->
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Select "Logout" below if you are ready to end your current session.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      
+    </script>
+    <!-- Bootstrap core JavaScript -->
+    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/bootstrap/js/ui-bootstrap-tpls-2.5.0.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
+    <!-- <script src="vendor/datatables/jquery.dataTables.js"></script> -->
+    <!-- <script src="vendor/datatables/dataTables.bootstrap4.js"></script> -->
+
+    <!-- Custom scripts for this template -->
+    <script src="js/sb-admin.js"></script>
+
+    <!-- <script type="text/javascript" src="vendor/jquery/jQuery-Cookie/jquery.cookie.min.js"></script> -->
+    <script type="text/javascript" src="js/functions/navigate.js"></script>
+    <script type="text/javascript" src="js/functions/script.js"></script>
+    
+    <!-- ANGULARJS -->
+    <script type="text/javascript" src="angularjs/controllers/loginCtrl.js"></script>
+    <script type="text/javascript" src="angularjs/controllers/mainCtrl.js"></script>
+    <script type="text/javascript" src="angularjs/controllers/adminCtrl.js"></script>
+    <script type="text/javascript" src="angularjs/controllers/userCtrl.js"></script>
+    <script type="text/javascript" src="angularjs/controllers/attendCtrl.js"></script>
+    
+    <!-- <script type="text/javascript" src="angularjs/controllers/filter.js"></script> -->
+    
+    <script type="text/javascript" src="angularjs/service/userService.js"></script>
+    <script type="text/javascript" src="angularjs/service/adminService.js"></script>
+    <script type="text/javascript" src="angularjs/service/loginService.js"></script>
+    <script type="text/javascript" src="angularjs/service/attendService.js"></script>
+
+    <!-- Global Scripts -->
+    <script type="text/javascript" src="js/functions/login.js"></script>
+    <script type="text/javascript" src="js/functions/general_script.js"></script>
+    <script type="text/javascript" src="js/functions/global_variables.js"></script>
+    <!-- ComboDate -->
+    <script type="text/javascript" src="vendor/jplugins/moment.js"></script>
+    <script type="text/javascript" src="vendor/jplugins/combodate.js"></script>
+
+    <script src="lib/dirPagination.js"></script>
+    <!-- <script src="app/app.js"></script> -->
+
+    <script>
+    </script>
+
+  </body>
+
+</html>

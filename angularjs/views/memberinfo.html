@@ -1,0 +1,125 @@
+<div class="container-fluid" id="meminfo">
+  
+  <div class="row"><br/></div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6 class="card-title mb-1 large">
+          
+          <a href="#" class="col-xs-10" >
+          <h4>{{f_name}}, </h4>
+          <label ></label>
+          </a>
+          
+          <label class="btn btn-primary pull-right" name="editInfo"><input type="checkbox" class="hidden" for="editInfo" name="editInfo" ng-model="editInfo" ng-click="editMember(item.userID)"> <ic class="fa fa-pencil"></i></label>
+          <br/>
+          <form name="myForm" ng-submit="register()"  >
+            <label>ID: {{id}}</label>
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-6">
+                  <label>Role : </label>
+                    <input type="text" class="form-control" name="role" ng-model="usertype" readonly>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Email : </label>
+                    <input type="email" class="form-control" name="email" ng-model="email" ng-readonly="!editInfo">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>Age : </label>
+                    <input type="text" class="form-control" name="fnameDisplay" ng-model="first_name" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Gender : </label>
+                    <input type="text" class="form-control" name="address" ng-model="lnameDisplay" ng-readonly="!editInfo">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>Status : </label>
+                    <input type="text" class="form-control" name="status" ng-model="status" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Nationality : </label>
+                    <input type="text" class="form-control" name="nationality" ng-model="nationality" ng-readonly="!editInfo">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>Birthdate : </label>
+                    <input type="date" class="form-control" name="birthday" ng-value="birthdate" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Home Address : </label>
+                    <textarea rows="2" cols="25" class="form-control" style="border-radius: 5px; height: 50px;" ng-model="address" ng-readonly="!editInfo"></textarea>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>Phone Number : </label>
+                    <input type="number" class="form-control" name="birthday" ng-value="phone" ng-readonly="!editInfo">
+                  </div>
+                </div>
+                <button type="submit" class="col-md-2 btn btn-primary pull-right" ng-show="editInfo"><i class="fa fa-save"></i> Save</button>
+
+              </div>
+            <!-- <div class="form-group">
+              <label>SSS : </label>
+              <input type="text" class="form-control" name="sss" ng-model="sss" readonly>
+            </div>
+            <div class="form-group">
+              <label>TIN : </label>
+              <input type="text" class="form-control" name="tin" ng-model="tin" readonly>
+            </div> -->
+          </form>
+        </div>
+        <hr class="my-0">
+        <div class="card-body py-2 small">
+          <a class="mr-3 d-inline-block" href="#">
+          <i class="fa fa-fw fa-facebook"></i>
+          Facebook </a>
+          <a class="mr-3 d-inline-block" href="#">
+          <i class="fa fa-fw fa-envelope"></i>
+          Gmail </a>
+          <a class="d-inline-block" href="#">
+          <i class="fa fa-fw fa-yahoo"></i>
+          Yahoo! </a>
+        </div>
+        <div class="card-footer small text-muted">
+           Updated 1 hr ago
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 pull-right">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="col-xs-1 text-center" style="align-content: center;">
+            <img src="img/user1.png">
+          </div>
+          <br/>
+          <h6 class="card-title mb-1">
+          <a href="#">COMPANY PROFILE</a>
+          </h6>
+          <p class="card-text medium">
+            NDM Builders Aim to delivered service with quality and exellence.
+          </p>
+          <h6 class="card-title mb-1">
+          <a href="#">INSTRUCTIONS</a>
+          </h6>
+          <p class="card-text medium">
+            <small>To Update Personal Information</small>
+            <ol class="small">
+              <li>Click the Pencil button on the upper right side of the information panel</li>
+            </ol>
+          </p>
+        </div>
+        <hr class="my-0" />
+        <div class="card-body py-2 small">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
