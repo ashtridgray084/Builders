@@ -9,7 +9,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin - Start Bootstrap Template</title>
+    <title>NDM Sanchez Builders and Development Corp.</title>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-2.0.3.min.js"></script>
     <!-- Bootstrap core CSS -->
@@ -24,7 +24,7 @@
 
     <!-- ANGULARJS -->
     <script src="angularjs/1.4.8/angular.min.js"></script> 
-    <!-- <script type="text/javascript" src="angularjs/1.4.8/angular-validation-match.js"></script> -->
+    <script type="text/javascript" src="angularjs/1.4.8/angular-validation-match.js"></script>
 
     <script>
       var ndmApp = angular.module('ndmApp',[]);
@@ -36,7 +36,7 @@
 
     <div class="container-fluid">
 
-      <div class="card card-register mx-auto mt-1 pull-right" style="width: 350px;">
+      <div class="card card-register mx-auto mt-1 pull-left" style="width: 350px;">
         <div class="card-header">
           Register an Account
         </div>
@@ -45,7 +45,7 @@
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-12">
-                  <label  for="exampleInputName">*Usertype </label>
+                  <label>*Usertype </label>
                   <select ng-model="usertype">
                     <option>--- SignUp As ---</option>
                     <option ng-repeat="item in usertypeList" value="{{item.usertype}}">{{item.usertype}}</option>
@@ -54,32 +54,32 @@
               </div>
               <div class="form-row">
                 <div class="col-md-12">
-                  <label  for="exampleInputName">*First name</label>
-                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter first name"  name="firstname" ng-model="firstname">
+                  <label  for="firstname">*First name</label>
+                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter first name"  name="firstname" ng-model="firstname" required>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-12">
-                  <label for="exampleInputLastName">*Middle name</label>
-                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter last name" name="middlename" ng-model="middlename">
+                  <label for="middlename">*Middle name</label>
+                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter last name" name="middlename" ng-model="middlename" required>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-12">
-                  <label for="exampleInputLastName">*Last name</label>
-                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter last name" name="lastname" ng-model="lastname">
+                  <label for="lastname">*Last name</label>
+                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter last name" name="lastname" ng-model="lastname" required>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
-                  <label for="">*Age</label>
+                  <label for="age">*Age</label>
                   <input type="number" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Age"  name="age" ng-model="age">
                 </div>
                 <div class="col-md-6">
-                  <label for="exampleInputLastName">*Gender</label>
-                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Gender" name="gender" ng-model="gender">
+                  <label for="gender">*Gender</label>
+                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Gender" name="gender" ng-model="gender" required>
                 </div>
               </div>
             </div>
@@ -87,46 +87,45 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <label for="exampleInputBirthdate">*Status</label>
-                  <input type="text" class="form-control" id="" placeholder="Enter Status"  name="birthdate" ng-model="birthdate">
+                  <input type="text" class="form-control" id="" placeholder="Enter Status"  name="birthdate" ng-model="birthdate" required>
                 </div>
                 <div class="col-md-6">
-                  <label for="exampleInputStatus">*Birthdate</label>
-                  <input type="text" class="form-control" id="status" placeholder="yyyy-MM-dd" name="status" ng-model="status">
+                  <label for="status">*Birthdate</label>
+                  <input type="text" class="form-control" id="status" placeholder="yyyy-MM-dd" name="status" ng-model="status" required>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-12">
-                  <label for="exampleInputName">*Nationality</label>
-                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Nationality"  name="nationality" ng-model="nationality">
+                  <label for="nationality">*Nationality</label>
+                  <input type="text" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Nationality"  name="nationality" ng-model="nationality" required>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-12">
                   <label for="exampleInputLastName">*Address</label>
-                  <!-- <input type="text" class="form-control" id="exampleInputLastName" aria-describedby="nameHelp" placeholder="Enter Address" name="address" ng-model="address"> -->
-                  <textarea class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Address" name="address" ng-model="address"></textarea>
+                  <textarea class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Address" name="address" ng-model="address" required></textarea>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-12">
                   <label for="exampleInputName">*Phone Number</label>
-                  <input type="number" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Phone Number"  name="phone" ng-model="phone">
+                  <input type="number" class="form-control" id="" aria-describedby="nameHelp" placeholder="Enter Phone Number"  name="phone" ng-model="phone" n required>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-12">
-                  <label for="exampleInputEmail1">*Email address</label>
-                  <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email" name="email" ng-model="email">
+                  <label for="email">*Email address</label>
+                  <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email" name="email" ng-model="email" required>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-12">
-                  <label for="exampleInputEmail1">*Username</label>
-                  <input type="text" class="form-control" id="" aria-describedby="userHelp" placeholder="Enter Username" name="usernameInput" ng-model="usernameInput">
+                  <label for="usernameInput">*Username</label>
+                  <input type="text" class="form-control" id="" aria-describedby="userHelp" placeholder="Enter Username" name="usernameInput" ng-model="usernameInput" required>
                 </div>
               </div>
             </div>
