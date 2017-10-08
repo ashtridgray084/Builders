@@ -10,7 +10,7 @@ ndmApp.factory('adminService', function($http,$q,$window) {
 		getAllUserInfo: getAllUserInfo
 	 };
 	 return apiRouter;
-	 
+	  
 	function signupProcess(fname,mname,lname,age,gender,status,birthdate,nationality,address,phone,email,username,password,usertype) {
 		return $http({
 			method: 'post',

@@ -49,13 +49,13 @@ ndmApp.controller('mainCtrl', function($scope, $window, $rootScope, adminService
     //     });
         // $scope.first_name = "";
     // $scope.userID = id;
-    $scope.id = $scope.userID;
-    $scope.userID = localStorage.userID;
-    adminService.editMember($scope.id)
-        .then(function(data){
-        $scope.id = data.data[0].userID;
-        $scope.f_name = data.data[0].first_name;
-    });
+    // $scope.id = $scope.userID;
+    // $scope.userID = localStorage.userID;
+    // adminService.editMember($scope.id)
+    //     .then(function(data){
+    //     $scope.id = data.data[0].userID;
+    //     $scope.f_name = data.data[0].first_name;
+    // });
 
         // adminService.saveEditProd($scope.MainID,editJSON)
         // .then(function(data){

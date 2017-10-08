@@ -37,17 +37,23 @@ ndmApp.controller('adminCtrl', function($scope, $rootScope, adminService) {
  //            $scope.usernameOrigFetch = angular.copy($scope.unameEdit);
 	// 	});
 
+    //API getAllMemberInfo Call when adminCtrl Load
 	adminService.getAllMemberInfo()
+        //Data catch to this function
         .then(function(data){
+            //Array of All Member Info
             $scope.memberList = data.data;
+            //End Loader
             $rootScope.loader = false;
         });
 
     adminService.getUserType()
         .then(function(data){
+            //Array of All User Type
             $scope.usertypeList = data.data;
+            //End Loader
             $rootScope.loader = false;
-        });
+        }); 
 
 
     $scope.loadUserRole = function(uID,uname,utype){
@@ -84,6 +90,7 @@ ndmApp.controller('adminCtrl', function($scope, $rootScope, adminService) {
 
     }
 
+
 	$scope.signUp = function(){
 		// alert($scope.usertype + ":" + $scope.firstname + ":" + $scope.lastname + ":" + $scope.email + ":" + $scope.usernameInput + ":" + $scope.pwd + ":" + $scope.confirmPwd);
 
@@ -96,7 +103,7 @@ ndmApp.controller('adminCtrl', function($scope, $rootScope, adminService) {
 					alert(data.data);
                     $rootScope.loader = false;
                     // location.reload();
-                    window.location.href("login.html");
+                    window.location.href = "login.html";
                     // adminService.getUserList()
                     //     .then(function(data){
                     //         $scope.userList = data.data;
@@ -184,6 +191,24 @@ ndmApp.controller('adminCtrl', function($scope, $rootScope, adminService) {
             console.log(deleteArray);
         }
     }
+
+    //JS Functions
+
+    function maxLengthCheck(object) {
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+    }
+    
+  function isNumeric (evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode (key);
+    var regex = /[0-9]|\./;
+    if ( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
 	
     $("#checkAll").change(function () {
         $("input:checkbox").prop('checked', $(this).prop("checked"));

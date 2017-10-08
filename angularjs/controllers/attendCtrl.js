@@ -1,5 +1,5 @@
 ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendService){
-  	$rootScope.usertype = localStorage.usertype;
+    $rootScope.usertype = localStorage.usertype;
     $rootScope.loader = true;
 
     $rootScope.memberinfo_mgt = localStorage.memberinfo_mgt;
@@ -18,6 +18,7 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
     attendService.getAllAttendance()
         .then(function(data){
             $scope.attendanceList = data.data;
+            console.log( $scope.attendanceList);
         });
 
     $scope.attendList = function(){
@@ -174,7 +175,7 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
 
     }
 
-    
+    // }
 
     $scope.cancelEdit = function(){
        $scope.activepage = 'main';
