@@ -36,11 +36,11 @@ ndmApp.controller('mainCtrl', function($scope, $window, $rootScope, adminService
     //         $rootScope.loader = false;
     //     });
 
-    // adminService.getAllMemberInfo(id)
-    //     .then(function(data){
-    //         $scope.memberList = data.data;
-    //         $rootScope.loader = false;
-    //     });
+    adminService.getAllMemberInfo()
+        .then(function(data){
+            $scope.memberInfo = data.data;
+            $rootScope.loader = false;
+        });
 
     // adminService.getAllUserInfo()
     //     .then(function(data){
@@ -51,17 +51,36 @@ ndmApp.controller('mainCtrl', function($scope, $window, $rootScope, adminService
     // $scope.userID = id;
     // $scope.id = $scope.userID;
     // $scope.userID = localStorage.userID;
-    // adminService.editMember($scope.id)
-    //     .then(function(data){
-    //     $scope.id = data.data[0].userID;
-    //     $scope.f_name = data.data[0].first_name;
-    // });
 
-        // adminService.saveEditProd($scope.MainID,editJSON)
-        // .then(function(data){
-        //     $rootScope.loader = false;
-        //     $scope.cancelEdit();
-        // });
+    $scope.editMember = function(id){
+        adminService.editMember(id)
+            .then(function(data){
+            $scope.memberData = data.data;
+        });
+    }
+    
+    $('.test-input').unbind('keyup change input paste').bind('keyup change input paste',function(e){
+    var $this = $(this);
+    var val = $this.val();
+    var valLength = val.length;
+    var maxCount = $this.attr('maxlength');
+    if(valLength>maxCount){
+        $this.val($this.val().substring(0,maxCount));
+    }
+    });
+
+     $('.allownumeric').bind("keypress keyup blur",function (event) {
+        $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+   
+   $('.numbersOnly').keyup(function () {
+    if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+       this.value = this.value.replace(/[^0-9\.]/g, '');
+    }
+});
 
     // }
 

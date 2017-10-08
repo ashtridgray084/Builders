@@ -324,16 +324,16 @@ $app->get('/getAllMemberInfo/', function ($request, $response, $args) {
   foreach ($res as $row){
     $userListData[] = array(
       "userID"  => $row['userID'],
-      "fname"  => $row['first_name'],
-      "mname"  => $row['middle_name'],
-      "lname"  => $row['last_name'],
+      "first_name"  => $row['first_name'],
+      "middle_name"  => $row['middle_name'],
+      "last_name"  => $row['last_name'],
       "age"  => $row['age'],
       "gender"  => $row['gender'],
       "status"  => $row['status'],
       "birthdate"  => $row['birthdate'],
       "nationality"  => $row['nationality'],
       "address"  => $row['address'],
-      "phone"  => $row['phonenumber'],
+      "phone"  => $row['phone'],
       "email"  => $row['email']
     );
   }

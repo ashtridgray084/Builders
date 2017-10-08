@@ -7,63 +7,59 @@
         <div class="card-body">
           <h6 class="card-title mb-1 large">
           
-          <a href="#" class="col-xs-10" >
-          <h4>{{f_name}}, </h4>
-          <label ></label>
-          </a>
           
-          <label class="btn btn-primary pull-right" name="editInfo"><input type="checkbox" class="hidden" for="editInfo" name="editInfo" ng-model="editInfo" ng-click="editMember(item.userID)"> <ic class="fa fa-pencil"></i></label>
-          <br/>
+          <label class="btn btn-primary pull-right" name="editInfo"><input type="checkbox" class="hidden" for="editInfo" name="editInfo" ng-model="editInfo"> <ic class="fa fa-pencil"></i></label>
+          <br/><br/>
           <form name="myForm" ng-submit="register()"  >
-            <label>ID: {{id}}</label>
-              <div class="form-group">
+            <div class="form-group" ng-repeat="user in memberInfo | filter: username" style="list-style: none;">
                 <div class="form-row">
-                  <div class="col-md-6">
-                  <label>Role : </label>
+                  <div class="col-md-6"><br/>
+                    <label>Role : </label>
                     <input type="text" class="form-control" name="role" ng-model="usertype" readonly>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6"><br/>
                     <label>Email : </label>
-                    <input type="email" class="form-control" name="email" ng-model="email" ng-readonly="!editInfo">
+                    <input type="email" class="form-control" name="email" value="{{user.email}}" ng-readonly="!editInfo">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-6">
+                  <div class="col-md-6"><br/>
                     <label>Age : </label>
-                    <input type="text" class="form-control" name="fnameDisplay" ng-model="first_name" ng-readonly="!editInfo">
+                    <input type="text" class="form-control" name="fnameDisplay" value="{{user.age}}" ng-readonly="!editInfo">
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6"><br/>
                     <label>Gender : </label>
-                    <input type="text" class="form-control" name="address" ng-model="lnameDisplay" ng-readonly="!editInfo">
+                    <input type="text" class="form-control" name="gender" value="{{user.gender}}" ng-readonly="!editInfo">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-6">
+                  <div class="col-md-6"><br/>
                     <label>Status : </label>
-                    <input type="text" class="form-control" name="status" ng-model="status" ng-readonly="!editInfo">
+                    <input type="text" class="form-control" name="status" value="{{user.status}}" ng-readonly="!editInfo">
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6"><br/>
                     <label>Nationality : </label>
-                    <input type="text" class="form-control" name="nationality" ng-model="nationality" ng-readonly="!editInfo">
+                    <input type="text" class="form-control" name="nationality" value="{{user.nationality}}" ng-readonly="!editInfo">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-6">
+                  <div class="col-md-6"><br/>
                     <label>Birthdate : </label>
-                    <input type="date" class="form-control" name="birthday" ng-value="birthdate" ng-readonly="!editInfo">
+                    <input type="date" class="form-control" name="birthday" value="{{user.birthdate}}" ng-readonly="!editInfo">
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6"><br/>
                     <label>Home Address : </label>
-                    <textarea rows="2" cols="25" class="form-control" style="border-radius: 5px; height: 50px;" ng-model="address" ng-readonly="!editInfo"></textarea>
+                    <textarea rows="2" cols="25" class="form-control" style="border-radius: 5px; height: 50px;" ng-model="user.address" ng-readonly="!editInfo"></textarea>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-6">
+                  <div class="col-md-6"><br/>
                     <label>Phone Number : </label>
-                    <input type="number" class="form-control" name="birthday" ng-value="phone" ng-readonly="!editInfo">
+                    <input type="number" class="numbersOnly form-control" name="numeric" value="{{user.phone}}" min="1" max="9" maxlength="11" ng-pattern="/^\d{1-9}$/" ng-readonly="!editInfo">
                   </div>
                 </div>
-                <button type="submit" class="col-md-2 btn btn-primary pull-right" ng-show="editInfo"><i class="fa fa-save"></i> Save</button>
+
+                <button type="submit" class="col-md-2 btn btn-primary pull-right" ng-click="editMember(user.userID)" ng-show="editInfo"><i class="fa fa-save"></i> Save</button>
 
               </div>
             <!-- <div class="form-group">

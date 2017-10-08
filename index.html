@@ -8,7 +8,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>NDM Builders</title>
+    <title>N.D.M. SANCHEZ BUILDERS & DEVELOPMENT CORPORATION</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -81,8 +81,9 @@
   <body class="fixed-nav bg-dark" id="page-top" ng-controller="mainCtrl">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#">
-      <img src="img/NDMlogo.png" style="height: 30px; width: 30px; border-radius: 15px; top: 0px;"> NDM Builders
+    <a class="navbar-brand" href="#/">
+      <img src="img/NDMlogo.png" style="height: 30px; width: 30px; border-radius: 15px; top: 0px;">
+      N.D.M. SANCHEZ BUILDERS & DEVELOPMENT CORPORATION
     </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -91,28 +92,28 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="nav navbar-nav navbar-sidenav">
         <br/>
-          <li class="nav-item" ng-show="memberinfo_mgt==1" data-toggle="tooltip" data-placement="right" title="Member Info">
+          <li class="nav-item has-sub" ng-show="memberinfo_mgt==1" data-toggle="tooltip" data-placement="right" title="Member Info">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMemberInfo" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-users"></i>
               <span class="nav-link-text">
                 Member Information</span>
             </a>
-            <ul class="sidenav-second-level collapse" id="collapseMemberInfo">
+            <ul class="sidenav-second-level collapse sub" id="collapseMemberInfo">
               <li>
-                <a href="#/">Profile</a>
+                <a href="#/">Main Profile</a>
               </li>
               <li ng-if="usertype=='Admin'">
                 <a href="#/userSettings">Member Settings</a>
               </li>
             </ul>
           </li>
-          <li class="nav-item" ng-show="attendance_mgt==1" data-toggle="tooltip" data-placement="right" title="Attendance">
-            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAttendance" data-parent="#exampleAccordion">
+          <li class="nav-item has-sub" ng-show="attendance_mgt==1" data-toggle="tooltip" data-placement="right" title="Attendance">
+            <a class="nav-link nav-link-collapse collapsed sub" data-toggle="collapse" href="#collapseAttendance" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-book"></i>
               <span class="nav-link-text">
                 Attendance</span>
             </a>
-            <ul class="sidenav-second-level collapse" id="collapseAttendance">
+            <ul class="sidenav-second-level collapse sub" id="collapseAttendance">
               <li>
                 <a href="#/attendance">Daily Attendance</a>
               </li>
@@ -167,15 +168,11 @@
           </a>
           
           <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-            <!-- <a class="dropdown-item fa fa-users" ng-if="usertype=='Admin'" id="p5" href="#/userSettings">
-              <strong>Member Settings</strong>
+            <a class="dropdown-item fa fa-users" ng-if="usertype=='Admin'" id="p5" href="#/profile">
+              <strong>Profile</strong>
               <div class="dropdown-divider"></div>
             </a>
-           
-            <a class="dropdown-item fa fa-cog" ng-if="usertype=='Admin'" id="p6" href="#/accessSettings">
-              <strong>Access Settings</strong>
-              <div class="dropdown-divider"></div>
-            </a> -->
+
             <a class="dropdown-item fa fa-info-circle" data-toggle="modal" data-target="#aboutUs">
               <strong>About Us</strong>
             </a>
