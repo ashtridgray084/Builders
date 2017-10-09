@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.0.2
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2017 at 09:06 AM
--- Server version: 10.0.17-MariaDB
--- PHP Version: 5.6.14
+-- Generation Time: Oct 09, 2017 at 09:06 PM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -51,21 +53,23 @@ CREATE TABLE `attendance_tbl` (
 --
 
 INSERT INTO `attendance_tbl` (`id`, `userID`, `name`, `department`, `shift`, `dates`, `time_in`, `time_out`, `workday`, `attend_day`, `absence_day`, `lateness`, `early_leave`, `leaved`, `sickleave`, `ot_hrs`, `ot`) VALUES
-(1, '2', 'Jon', 'Engineer A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0759,0750,0730,0737', '1700,1705,1702,1701,1723', '5', '5', '0', '0', '0', '0', '5', '0', '0'),
-(2, '3', 'Adam', 'Engineer B', 'Shift2 (Night)', '2017-09-01~2017-09-06', '1730,1705,1702,1701,1723', '0800,0759,0750,0730,0737', '5', '5', '0', '1', '0', '0', '5', '0', '0'),
-(3, '4', 'George', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0732,0830,0758,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(4, '5', 'Philips', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0752,0750,0758,0740', '1700,1705,1717,1707,1701', '5', '5', '0', '0', '0', '0', '0', '0', '0'),
-(16, '6', 'Bran', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(17, '7', 'Ben', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(18, '8', 'Rocky', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(19, '9', 'Gio', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(20, '10', 'Alphonse', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(21, '11', 'John', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(22, '12', 'Matteo', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(23, '13', 'Jonathan', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(24, '14', 'Claude', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(25, '15', 'Simon', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
-(26, '16', 'Peter', 'Worker A', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0');
+(1, '2', 'Jon', 'EngineerA', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0759,0750,0730,0737', '1700,1705,1702,1701,1723', '5', '5', '0', '0', '0', '0', '5', '0', '0'),
+(2, '3', 'Adam', 'EngineerB', 'Shift2 (Night)', '2017-09-01~2017-09-06', '1730,1705,1702,1701,1723', '0800,0759,0750,0730,0737', '5', '5', '0', '1', '0', '0', '5', '0', '0'),
+(3, '4', 'George Domingo', 'WorkerA', 'Shift1 (Day)', '2017-09-01', '0700', '1700', '1', '1', '0', '0', '0', '5', '0', '0', '0'),
+(4, '5', 'Philips', 'WorkerA', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0752,0750,0758,0740', '1700,1705,1717,1707,1701', '5', '5', '0', '0', '0', '0', '0', '0', '0'),
+(16, '6', 'Bran', 'WorkerA', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(17, '7', 'Ben', 'WorkerA', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(18, '8', 'Rocky', 'WorkerA', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(19, '9', 'Gio', 'WorkerA', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(20, '10', 'Alphonse', 'WorkerA', 'Shift1 (Day)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(21, '11', 'John', 'WorkerB', 'Shift1 (Night)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(22, '12', 'Matteo', 'WorkerB', 'Shift1 (Night)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(23, '13', 'James', 'WorkerB', 'Shift1 (Night)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(24, '14', 'Claude', 'WorkerB', 'Shift1 (Night)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(25, '15', 'Simon', 'WorkerB', 'Shift1 (Night)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(26, '16', 'Peter', 'WorkerB', 'Shift1 (Night)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(27, '17', 'Luke', 'WorkerB', 'Shift1 (Night)', '2017-09-01~2017-09-06', '0800,0712,0730,0738,0800', '1700,1702,1705,1700,1701', '5', '5', '0', '1', '0', '0', '0', '0', '0'),
+(28, '1', 'Jisel', 'EngineerC', 'DayShift', '2017-09-01~2017-09-06', '0800', '1700', '1', '1', '5', '0', '0', '1', '1', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -177,36 +181,44 @@ INSERT INTO `bk_login_history` (`id`, `username`, `ip`, `time`) VALUES
 (49, 'philips', '::1', NULL),
 (50, 'bran', '::1', NULL),
 (51, 'bran', '::1', NULL),
-(52, 'Jisel', '192.168.1.2', NULL),
-(53, 'Jisel', '10.24.120.96', NULL),
-(54, 'Jon', '10.24.200.41', NULL),
-(55, 'Jon', '::1', NULL),
+(52, 'George', '::1', NULL),
+(53, 'Jisel', '::1', NULL),
+(54, 'Jisel', '::1', NULL),
+(55, 'Jisel', '::1', NULL),
 (56, 'Jon', '::1', NULL),
-(57, 'Jon', '::1', NULL),
+(57, 'Jisel', '::1', NULL),
 (58, 'Jisel', '::1', NULL),
-(59, 'Jisel', '10.24.120.101', NULL),
-(60, 'Jisel', '10.24.120.103', NULL),
-(61, 'Jisel', '::1', NULL),
-(62, 'Jisel', '::1', NULL),
-(63, 'Jisel', '::1', NULL),
+(59, 'Jisel', '::1', NULL),
+(60, 'Jisel', '::1', NULL),
+(61, 'Jon', '::1', NULL),
+(62, 'Adam', '::1', NULL),
+(63, 'Jon', '::1', NULL),
 (64, 'Jisel', '::1', NULL),
 (65, 'Jon', '::1', NULL),
-(66, 'Jisel', '::1', NULL),
-(67, 'Jisel', '::1', NULL),
-(68, 'Jon', '::1', NULL),
-(69, 'Adam', '::1', NULL),
-(70, 'jisel', '::1', NULL),
-(71, 'jon', '::1', NULL),
-(72, 'jisel', '::1', NULL),
+(66, 'Jon', '::1', NULL),
+(67, 'Jon', '::1', NULL),
+(68, 'Jisel', '::1', NULL),
+(69, 'JIsel', '::1', NULL),
+(70, 'Jisel', '::1', NULL),
+(71, 'Jisel', '::1', NULL),
+(72, 'Jisel', '::1', NULL),
 (73, 'Jisel', '::1', NULL),
 (74, 'Jisel', '::1', NULL),
 (75, 'Jisel', '::1', NULL),
-(76, 'Jisel', '127.0.0.1', NULL),
+(76, 'Jisel', '::1', NULL),
 (77, 'Jisel', '::1', NULL),
 (78, 'Jisel', '::1', NULL),
 (79, 'Jisel', '::1', NULL),
-(80, 'Jisel', '::1', NULL),
-(81, 'Jisel', '::1', NULL);
+(80, 'Jon', '::1', NULL),
+(81, 'Jon', '::1', NULL),
+(82, 'Adam', '::1', NULL),
+(83, 'Jisel', '::1', NULL),
+(84, 'Jon', '::1', NULL),
+(85, 'Jisel', '::1', NULL),
+(86, 'Jon', '::1', NULL),
+(87, 'George', '::1', NULL),
+(88, 'Jon', '::1', NULL),
+(89, 'Jisel', '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -272,21 +284,18 @@ CREATE TABLE `bk_user` (
 INSERT INTO `bk_user` (`userID`, `Username`, `Password`, `User_Type`) VALUES
 (1, 'Jisel', '1234', 'Admin'),
 (2, 'Jon', '1234', 'Engineer'),
-(3, 'Adam', '1234', 'Worker'),
-(4, 'george25', '1234', 'Worker'),
+(3, 'Adam', '1234', 'Engineer'),
+(4, 'George', '1234', 'Worker'),
 (5, 'philips', '1234', 'Worker'),
 (6, 'bran', '1234', 'Worker'),
 (7, 'ben', '1234', 'Worker'),
 (8, 'rocknroll', '1234', 'Worker'),
 (9, 'Gionee', '1234', 'Worker'),
-(10, 'Gionee', '1234', 'Worker'),
-(11, 'JohnB', '1234', 'Worker'),
-(12, 'KULOT', 'jjjj', 'Worker'),
-(13, 'JesDel', '1111', 'Worker'),
-(14, 'JesDel', '1111', 'Worker'),
-(15, 'Jelly01', 'qqqq', 'Engineer'),
-(16, 'IceCream', '1234', 'Admin'),
-(17, 'Rocky123', '1234', 'Worker');
+(10, 'Pistachio', '1234', 'Worker'),
+(11, 'Pistachio', '1234', 'Worker'),
+(12, 'March03', '1234', 'Worker'),
+(13, 'Kitty', '1234', 'Worker'),
+(14, 'Jes', '1234', 'Worker');
 
 -- --------------------------------------------------------
 
@@ -323,10 +332,7 @@ INSERT INTO `bk_user_access` (`accessID`, `userID`, `memberinfo_mgt`, `attendanc
 (11, 11, 1, 1, 1, 1, NULL, NULL),
 (12, 12, 1, 1, 1, 1, NULL, NULL),
 (13, 13, 1, 1, 1, 1, NULL, NULL),
-(14, 14, 1, 1, 1, 1, NULL, NULL),
-(15, 15, 1, 1, 1, 1, NULL, NULL),
-(16, 16, 1, 1, 1, 1, NULL, NULL),
-(17, 17, 1, 1, 1, 1, NULL, NULL);
+(14, 14, 1, 1, 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -348,7 +354,7 @@ CREATE TABLE `bk_user_profile` (
   `nationality` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `birthdate` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `phone` int(19) DEFAULT NULL
+  `phone` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -356,23 +362,20 @@ CREATE TABLE `bk_user_profile` (
 --
 
 INSERT INTO `bk_user_profile` (`profileID`, `userID`, `first_name`, `middle_name`, `last_name`, `email`, `password`, `age`, `gender`, `status`, `nationality`, `address`, `birthdate`, `phone`) VALUES
-(1, 1, 'Jessele', 'Del', 'Mundo', 'jiseldm@gmail.com', '1234', '23', 'Female', 'Single', 'Filipino', 'Malvar, Batangas', '1994-02-25', NULL),
-(2, 2, 'Jon', 'Snow', 'Stark', 'jonsnow@gmail.com', '1234', '23', 'Male', 'Single', 'American', 'Boston, USA', '1994-02-25', NULL),
-(3, 3, 'Adam Gio', 'DM', 'Domingo', 'adamgio.d@gmail.com', '1234', '23', 'Male', 'Single', 'American', 'New York, Manhattan', '1994-09-10', NULL),
-(4, 4, 'George', 'Ynah', 'Domingo', 'george.d@gmail.com', '1234', '23', 'Male', 'Single', 'Filipino', 'Malvar, Batangas', '1994-01-25', NULL),
-(5, 5, 'Philips', 'Reid', 'McDonalds', 'philips_mcdonalds@gmail.com', '1234', '23', 'Male', 'Mon Mar 21 1994 00:00:00 GMT+0800 (China Standard Time)', 'American', 'Malvar, Batangas', '0000-00-00', NULL),
-(6, 6, 'Brandon', 'Tully', 'Stark', 'bran_stark@gmail.com', '1234', '23', 'Male', '1994-02-29', 'Filipino', 'Northern, Winterfell', '0000-00-00', NULL),
-(7, 7, 'Ben', 'the', 'Beast', 'ben_beastprince@gmail.com', '1234', '23', 'Male', '1994-05-14', 'Filipino', 'Batangas', '0000-00-00', NULL),
-(8, 8, 'Rocky', 'and', 'Roll', 'rocky_and_roll@gmail.com', '1234', '23', 'Male', '1994-03-24', 'Filipino', '123 Malvar, Batangas', 'Single', NULL),
-(9, 9, 'Gio', 'ni', 'Agioni', 'gio_agioni@gmail.com', '1234', '23', 'Male', 'Single', 'Filipino', 'Batangas', 'Sun Oct 02 1994 00:00:00 GMT+0800 (China Standard Time)', NULL),
-(10, 10, 'Gio', 'nee', 'Agionee', 'gio_agionee@gmail.com', '1234', '23', 'Male', 'Single', 'Filipino', 'Bilucao, Malvar, Batangas', '1994-02-02', NULL),
-(11, 11, 'John', 'ny', 'Bravo', 'johnnybravo@gmail.com', '1234', '23', 'Male', 'Single', 'Filipino', 'Davao', '1994-07-27', NULL),
-(12, 12, 'grace', 'cabog', 'biscocho', 'mhg@HM.COM', 'jjjj', '19', 'female', 'Single', 'Filipino', 'boot', '1998-02-14', NULL),
-(13, 13, 'Jes', 'Del', 'Mundo', 'jesdel@gmail.com', '1111', '23', 'Female', 'Single', 'Filipino', 'Bilucao', '1992-02-25', 999784324),
-(14, 14, 'Jes', 'Del', 'Mundo', 'jesdel@gmail.com', '1111', '23', 'Female', 'Single', 'Filipino', 'Bilucao', '1992-02-25', 999784324),
-(15, 15, 'Jelly', 'Ace', 'Ice', 'jelly@ace.com', 'qqqq', '21', 'Female', 'Single', 'Filipino', 'Bilucao', '1994-08-25', 972613981),
-(16, 16, 'Ice', 'Cream', 'Cookies', 'icecream@cookies.com', '1234', '21', 'Female', 'Single', 'Filipino', 'bilucao', '1992-02-28', 92398169),
-(17, 17, 'Rocky', 'Road', 'Ice Cream', 'rockyroad@icecream.com', '1234', '23', 'Male', 'Single', 'Filipino', 'Malvar', '1994-05-09', 993492);
+(1, 1, 'Jessele', 'Del', 'Mundo', 'jiseldm@gmail.com', '1234', '23', 'Female', 'Single', 'Filipino', 'Malvar, Batangas', '1994-02-25', ''),
+(2, 2, 'Jon', 'Snow', 'Stark', 'jonsnow@stark.com', '1234', '23', 'Male', 'Single', 'American', 'New York', '1994-02-28', '97125874581'),
+(3, 3, 'Adam Gio', 'DM', 'Domingo', 'adamgio.d@gmail.com', '1234', '23', 'Male', 'Single', 'American', 'New York, Manhattan', '1994-09-10', ''),
+(4, 4, 'George', 'DM', 'Domingo', 'george.d@gmail.com', '1234', '22', 'Male', 'Single', 'Filipino', 'Malvar, Batangas', '1994-01-26', ''),
+(5, 5, 'Philips', 'Reid', 'McDonalds', 'philips_mcdonalds@gmail.com', '1234', '23', 'Male', 'Single', 'American', 'Malvar, Batangas', '0000-00-00', ''),
+(6, 6, 'Brandon', 'Tully', 'Stark', 'bran_stark@gmail.com', '1234', '23', 'Male', 'Single', 'Filipino', 'Northern, Winterfell', '0000-00-00', ''),
+(7, 7, 'Ben', 'the', 'Beast', 'ben_beastprince@gmail.com', '1234', '23', 'Male', 'Married', 'Filipino', 'Batangas', '0000-00-00', ''),
+(8, 8, 'Rocky', 'and', 'Roll', 'rocky_and_roll@gmail.com', '1234', '23', 'Male', 'Married', 'Filipino', '123 Malvar, Batangas', '1995-12-21', ''),
+(9, 9, 'Gio', 'ni', 'Agioni', 'gio_agioni@gmail.com', '1234', '23', 'Male', 'Single', 'Filipino', 'Batangas', '0000-00-00', ''),
+(10, 10, 'Picaso', 'potachio', 'cashew', 'pistachiocashew@gmail.com', '1234', '25', 'male', 'single', 'Filipino', 'Tanauan', '1992-05-14', '9987823543'),
+(11, 11, 'Picaso', 'potachio', 'cashew', 'pistachiocashew@gmail.com', '1234', '25', 'male', 'single', 'filipino', 'calamba', '1992-05-14', '9987823543'),
+(12, 12, 'March', 'April', 'May', 'march@gmail.com', '1234', '22', 'Male', 'Single', 'Filipino', 'Lemery', '1995-03-05', '9981234245'),
+(13, 13, 'Hello', 'Kitty', 'World', 'kitty@world.com', '1234', '21', 'Male', 'Single', 'Filipino', 'Malvar, Batangas', '1996-02-23', '95543187564'),
+(14, 14, 'Jes', 'Del', 'Mundo', 'jesdel@gmail.com', '1234', '23', 'Female', 'Single', 'Filipino', 'Bilucao', '1994-02-25', '9982521651');
 
 -- --------------------------------------------------------
 
@@ -444,6 +447,25 @@ INSERT INTO `customers` (`customerNumber`, `customerName`, `contactLastName`, `c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `datetime_tbl`
+--
+
+CREATE TABLE `datetime_tbl` (
+  `id` int(19) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `shiftID` int(11) NOT NULL,
+  `time_in_am` varchar(255) DEFAULT NULL,
+  `time_out_am` varchar(255) DEFAULT NULL,
+  `time_in_pm` varchar(255) DEFAULT NULL,
+  `time_out_pm` varchar(255) DEFAULT NULL,
+  `time_in_ot` varchar(255) DEFAULT NULL,
+  `time_out_ot` varchar(255) DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `member_info`
 --
 
@@ -501,7 +523,7 @@ CREATE TABLE `salary_tbl` (
 --
 
 INSERT INTO `salary_tbl` (`id`, `userID`, `name`, `department`, `shift`, `dated`, `timed`, `overtime`, `overtime_special`, `lateness`, `early_leave`, `tax_deduct`, `salary_deduct`, `allowance`, `night_diff`, `salary_adjustment`, `pay_date`, `net_pay`, `gross_pay`, `total_deduct`) VALUES
-(1, 2, 'Jon Snow', 'Engineer', 'Shift1 (Day)', '2017-08-16~2017-08-30', '40', '8', '0', '0', '0', '1500', '500', '540', '0', '0', '2017-09-15', '5040', '6500', 2000);
+(1, 4, 'George D', 'Worker A', 'Shift1-(Day)', '2017-10-15', '0800-1700', '2', '0', '0', '0', '1500', '501', '500', '0', '0', '2017-09-15~2017-09-30', '5001', '6501', 2001);
 
 -- --------------------------------------------------------
 
@@ -520,6 +542,15 @@ CREATE TABLE `schedule_tbl` (
   `timed` varchar(255) NOT NULL,
   `weeks` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `schedule_tbl`
+--
+
+INSERT INTO `schedule_tbl` (`id`, `userID`, `name`, `usertype`, `department`, `shift`, `dates`, `timed`, `weeks`) VALUES
+(1, 4, 'George D', 'Worker', 'Worker A', 'DayShift', '2017-10-01~2017-10-05', '0800-1700', '2 - (M-T-W-TH-F)'),
+(2, 2, 'Jon Snow', 'Engineer', 'Engineer A', 'DayShift', '2017-09-01~2017-09-06', '0800-1700', '2 - (M-T-W-TH-F)'),
+(3, 5, 'Philips', 'Worker', 'Worker A', 'DayShift', '2017-09-01', '0800-1700', '2 - (M-T-W-TH-F)');
 
 -- --------------------------------------------------------
 
@@ -687,7 +718,7 @@ ALTER TABLE `skincareproduct`
 -- AUTO_INCREMENT for table `attendance_tbl`
 --
 ALTER TABLE `attendance_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `bk_csv_history`
 --
@@ -697,7 +728,7 @@ ALTER TABLE `bk_csv_history`
 -- AUTO_INCREMENT for table `bk_login_history`
 --
 ALTER TABLE `bk_login_history`
-  MODIFY `id` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 --
 -- AUTO_INCREMENT for table `bk_mailing_list`
 --
@@ -707,17 +738,17 @@ ALTER TABLE `bk_mailing_list`
 -- AUTO_INCREMENT for table `bk_user`
 --
 ALTER TABLE `bk_user`
-  MODIFY `userID` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `userID` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `bk_user_access`
 --
 ALTER TABLE `bk_user_access`
-  MODIFY `accessID` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `accessID` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `bk_user_profile`
 --
 ALTER TABLE `bk_user_profile`
-  MODIFY `profileID` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `profileID` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `member_info`
 --
@@ -732,12 +763,13 @@ ALTER TABLE `salary_tbl`
 -- AUTO_INCREMENT for table `schedule_tbl`
 --
 ALTER TABLE `schedule_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `shift_tbl`
 --
 ALTER TABLE `shift_tbl`
-  MODIFY `shiftID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `shiftID` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
