@@ -51,7 +51,7 @@
           })
         .when('/schedule', {
           templateUrl : 'angularjs/views/schedule.html',
-          controller : 'adminCtrl'
+          controller : 'scheduleCtrl'
           })
         .when('/salary', {
           templateUrl : 'angularjs/views/salary.html',
@@ -63,11 +63,11 @@
           })
         .when('/attendMonitor', {
           templateUrl : 'angularjs/views/attendMonitor.html',
-          controller : 'adminCtrl'
+          controller : 'attendCtrl'
           })
         .when('/deptSched', {
           templateUrl : 'angularjs/views/deptSched.html',
-          controller : 'adminCtrl'
+          controller : 'scheduleCtrl'
           })
         .when('/payroll', {
           templateUrl : 'angularjs/views/payroll.html',
@@ -312,6 +312,8 @@
     <script type="text/javascript" src="angularjs/controllers/adminCtrl.js"></script>
     <script type="text/javascript" src="angularjs/controllers/userCtrl.js"></script>
     <script type="text/javascript" src="angularjs/controllers/attendCtrl.js"></script>
+    <script type="text/javascript" src="angularjs/controllers/scheduleCtrl.js"></script>
+    <!-- <script type="text/javascript" src="angularjs/controllers/salaryCtrl.js"></script> -->
     
     <!-- <script type="text/javascript" src="angularjs/controllers/filter.js"></script> -->
     
@@ -319,6 +321,8 @@
     <script type="text/javascript" src="angularjs/service/adminService.js"></script>
     <script type="text/javascript" src="angularjs/service/loginService.js"></script>
     <script type="text/javascript" src="angularjs/service/attendService.js"></script>
+    <script type="text/javascript" src="angularjs/service/scheduleService.js"></script>
+    <!-- <script type="text/javascript" src="angularjs/service/salaryService.js"></script> -->
 
     <!-- Global Scripts -->
     <script type="text/javascript" src="js/functions/login.js"></script>

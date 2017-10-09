@@ -1,4 +1,4 @@
-<div class="container" ng-controller="mainCtrl">
+<div class="container">
 
   <div class="row"><br/></div>
     <div class="card mb-3">
@@ -6,17 +6,26 @@
         <i class="fa fa-table"></i> Attendance Table
       </div>
       <div class="card-body">
-        
-        <div class="" ng-show="activepage=='main'">
+        <ul class="nav nav-pills">
+          <li class="active"><a class="btn" data-toggle="pill" data-target="#deptListTab" >Department List</a></li>
+          <li class=""><a class="btn" data-toggle="pill" data-target="#empListTab" >Employee List</a></li>
+          <li class=""><a class="btn" data-toggle="pill" data-target="#shiftListTab" >Employee Shifts</a></li>
+          <li class=""><a class="btn" data-toggle="pill" data-target="#timeListTab" >Employee Time</a></li>
+        </ul>
 
+        <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="deptListTab">
+
+        <div class="" ng-show="activepage=='main'" >
+          <br/>
           <div class="form-group">
             <div class="input-group col-sm-4"> 
-              <span class="input-group-addon btn-pink"><i class="fa fa-search fa-fw"></i></span><input type="text" class="form-control" name="search" id="search" ng-model="search" placeholder="Search Employee Name" />
+              <!-- <span class="input-group-addon btn-pink"><i class="fa fa-search fa-fw"></i></span><input type="text" class="form-control" name="search" id="search" ng-model="search" placeholder="Search Employee Name" /> -->
             </div>
           </div>
           <br />
           <button class="deleteall btn btn-danger fa fa-trash-o pull-right" data-toggle="modal" data-target="#delAttendModal" ng-click="delAttendee(items.userID)"></button><br /><br />
-
+ 
           <div class="table-responsive" style="overflow-x: auto;">
             <table class="table table-bordered table-stripped" >
               <thead>
@@ -24,26 +33,20 @@
                   <th class=""><input type="checkbox" name="select" id="checkAll" ng-model="item.selectedAll" ng-click="checkAll();" /> </th>
                   <th ng-click="sort('name')">Name <i class="fa sort-icon" ng-show="sortKey=='name'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></i></th>
                   <th ng-click="sort('department')">Department <span class="fa sort-icon" ng-show="sortKey=='department'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
-                  <th ng-click="sort('shift')">Shift <span class="fa sort-icon" ng-show="sortKey=='shift'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
+                  <!-- <th ng-click="sort('shift')">Shift <span class="fa sort-icon" ng-show="sortKey=='shift'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
                   <th ng-click="sort('dates')">Date <span class="fa sort-icon" ng-show="sortKey=='dates'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
                   <th ng-click="sort('time_in')">Time In <span class="fa sort-icon" ng-show="sortKey=='time_in'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
                   <th ng-click="sort('time_out')">Time Out <span class="fa sort-icon" ng-show="sortKey=='time_out'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
-                  <th ng-click="sort('lateness')">Late<span class="fa sort-icon" ng-show="sortKey=='lateness'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
+                  <th ng-click="sort('lateness')">Late<span class="fa sort-icon" ng-show="sortKey=='lateness'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th> -->
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr dir-paginate="item in attendanceList |orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+                <tr dir-paginate="item in deptAttendanceList |orderBy:sortKey:reverse|filter: search |itemsPerPage:5">
                   <td><input type="checkbox" name="select" value="checked" ng-model="item.selected" ng-click="selectToDel(item.selected,item.userID)" /> </td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.department }}</td>
-                  <td>{{ item.shift }}</td>
-                  <td>{{ item.dates }}</td>
-                  <td>{{ item.time_in }}</td>
-                  <td>{{ item.time_out }}</td>
-                  <td>{{ item.lateness }}</td>
                   <td>
-                    <button class="btn btn-info fa fa-eye"></button><br /><br />
                     <button class="btn btn-success fa fa-pencil" id="editbutton" ng-click="editAttendee(item.userID)"></button><br /><br />
                   </td>
                 </tr>
@@ -109,6 +112,12 @@
 
         </div>
 
+      </div>
+
+      <div role="tabpanel" class="tab-pane fade" id="empListTab"></div>
+      
+      </div>
+
             
       </div>
 
@@ -161,4 +170,4 @@
     </div>
     </div>
   </div>
-  </div> 
+  </div>

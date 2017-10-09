@@ -7,7 +7,8 @@ ndmApp.factory('adminService', function($http,$q,$window) {
 		editMember: editMember,
 		getUserType: getUserType,
 		getProfile: getProfile,
-		getAllUserInfo: getAllUserInfo
+		getAllUserInfo: getAllUserInfo,
+		saveMemberInfo: saveMemberInfo
 	 };
 	 return apiRouter;
 	  
@@ -92,6 +93,31 @@ ndmApp.factory('adminService', function($http,$q,$window) {
 		return $http({
 			method: 'get',
 			url: rootURL + '/getAllUserInfo/',
+			headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+		})
+	}
+
+	function saveMemberInfo(userID,email,fname,lname,mname,age,gender,status,phone,nationality,birthdate,address,username) {
+		return $http({
+			method: 'post',
+			url: rootURL + '/saveMemberInfo/',
+			data: $.param({
+				userID: userID,
+				email: email,
+				fname: fname,
+				lname: lname,
+				mname: mname,
+				age: age,
+				gender: gender,
+				status: status,
+				phone: phone,
+				nationality: nationality,
+				birthdate: birthdate,
+				address: address,
+				username: username
+			}),
 			headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }

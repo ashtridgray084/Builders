@@ -1,6 +1,5 @@
-ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendService){
+ndmApp.controller('scheduleCtrl', function($scope, $window, $rootScope, scheduleService){
     $rootScope.usertype = localStorage.usertype;
-    // $rootScope.loader = true;
 
     $rootScope.memberinfo_mgt = localStorage.memberinfo_mgt;
     $rootScope.attendance_mgt = localStorage.attendance_mgt;
@@ -11,39 +10,61 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
     renewCacheTime();
 
     $scope.activepage = "main";
-    // $rootScope.loader = true;
 
     // $scope.employees = employees;
 
-    attendService.getAllAttendance()
+    scheduleService.getAllSchedule()
         .then(function(data){
-            $scope.attendanceList = data.data;
-            console.log( $scope.attendanceList);
+            $scope.scheduleList = data.data;
+            console.log( $scope.scheduleList);
         });
 
-    attendService.deptAttendee()
+    scheduleService.getDepartmentSchedule()
         .then(function(data){
-            $scope.deptAttend = data.data;
-            console.log( $scope.deptAttend);
+            $scope.deptSchedList = data.data;
+            console.log( $scope.deptSchedList);
         });
 
-    attendService.getDepartmentAtendance()
+    $scope.dataDeptLoad = function(){
+        
+    }
+
+    $scope.dataDeptSchedule = function(department){
+        scheduleService.dataDeptSchedule(department)
         .then(function(data){
-            $scope.deptAttendanceList = data.data;
-            console.log( $scope.deptAttendanceList);
+            $scope.deptSchedList = data.data;
+            console.log( $scope.deptSchedList);
+        });
+    }
+    
+
+
+    scheduleService.getShift()
+        .then(function(data){
+            $scope.shiftList = data.data;
+            console.log( $scope.shiftList);
         });
 
-    $scope.attendList = function(){        
-        $rootScope.loader = true;
-        attendService.getAllAttendance()
+    scheduleService.getTime()
         .then(function(data){
-            $scope.attendanceList = data.data;
-            $rootScope.loader = false;
+            $scope.timeList = data.data;
+            console.log( $scope.timeList);
+        });
 
+    scheduleService.getWeeks()
+        .then(function(data){
+            $scope.weeksList = data.data;
+            console.log( $scope.weeksList);
+        });
+
+    $scope.scheuleListData = function(){
+        scheduleService.getAllSchedule()
+        .then(function(data){
+            $scope.scheduleList = data.data;
         });
     }
 
-    $scope.editAttendee = function(id){
+    $scope.editSchedule = function(id){
         $scope.activepage = 'edit';
         // $scope.MainID = id;
         // $scope.attID = userID;
@@ -51,81 +72,45 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
         // $scope.attEmail = email;
         // $scope.memberNameOrig = angular.copy($scope.mailNameEdit);
         // $scope.memberEmailOrig = angular.copy($scope.mailEmailEdit);
-        attendService.editAttendee(id)
+        attendService.editSchedule(id)
         .then(function(data){
             $rootScope.loader = false;
 
             // Original Values
-            $scope.attID = data.data[0].id;
-            $scope.attuID = data.data[0].userID;
-            $scope.attName = data.data[0].name;
-            $scope.attDept = data.data[0].department;
-            $scope.attShift = data.data[0].shift;
-            $scope.attDates = data.data[0].dates;
-            $scope.attTimeIn = data.data[0].time_in;
-            $scope.attTimeOut = data.data[0].time_out;
-            $scope.attWorkDay = data.data[0].workday;
-            $scope.attDay = data.data[0].attend_day;
-            $scope.attAbsDay = data.data[0].absence_day;
-            $scope.attLate = data.data[0].lateness;
-            $scope.attEL = data.data[0].early_leave;
-            $scope.attLeave = data.data[0].leaved;
-            $scope.attSL = data.data[0].sickleave;
-            $scope.attOThrs = data.data[0].ot_hrs;
-            $scope.attOT = data.data[0].ot;
+            $scope.schedID = data.data[0].id;
+            $scope.scheduID = data.data[0].userID;
+            $scope.schedName = data.data[0].name;
+            $scope.schedDept = data.data[0].department;
+            $scope.schedShift = data.data[0].shift;
+            $scope.schedDates = data.data[0].dates;
+            $scope.schedTimed = data.data[0].timed;
+            $scope.schedWeeks = data.data[0].weeks;
 
             // Edit Values
-            $scope.editAttID = data.data[0].id;
-            $scope.editAttuID = data.data[0].userID;
-            $scope.editAttName = data.data[0].name;
-            $scope.editAttDept = data.data[0].department;
-            $scope.editAttShift = data.data[0].shift;
-            $scope.editAttDates = data.data[0].dates;
-            $scope.editAttTimeIn = data.data[0].time_in;
-            $scope.editAttTimeOut = data.data[0].time_out;
-            $scope.editAttWorkDay = data.data[0].workday;
-            $scope.editAttDay = data.data[0].attend_day;
-            $scope.editAttAbsDay = data.data[0].absence_day;
-            $scope.editAttLate = data.data[0].lateness;
-            $scope.editAttEL = data.data[0].early_leave;
-            $scope.editAttLeave = data.data[0].leaved;
-            $scope.editAttSL = data.data[0].sickleave;
-            $scope.editAttOThrs = data.data[0].ot_hrs;
-            $scope.editAttOT = data.data[0].ot;
+            $scope.editSchedID = data.data[0].id;
+            $scope.editScheduID = data.data[0].userID;
+            $scope.editSchedName = data.data[0].name;
+            $scope.editSchedDept = data.data[0].department;
+            $scope.editSchedShift = data.data[0].shift;
+            $scope.editSchedDates = data.data[0].dates;
+            $scope.editSchedTimed = data.data[0].timed;
+            $scope.editSchedWeeks = data.data[0].weeks;
 
             $scope.orgValArr = {
-                name: $scope.attName,
-                department: $scope.attDept,
-                shift: $scope.attShift,
-                dates: $scope.attDates,
-                time_in: $scope.attTimeIn,
-                time_out: $scope.attTimeOut,
-                workday: $scope.attWorkDay,
-                attend_day: $scope.attDay,
-                absence_day: $scope.attAbsDay,
-                lateness: $scope.attLate,
-                early_leave: $scope.attEL,
-                leaved: $scope.attLeave,
-                sickleave: $scope.attSL,
-                ot_hrs: $scope.attOThrs,
-                ot: $scope.attOT
+                name: $scope.schedName,
+                department: $scope.schedDept,
+                shift: $scope.schedShift,
+                dates: $scope.schedDates,
+                timed: $scope.schedTimed,
+                weeks: $scope.schedWeeks
             };
             
-            $scope.attName = angular.copy($scope.editAttName);
-            $scope.attDept = angular.copy($scope.editAttDept);
-            $scope.attShift = angular.copy($scope.editAttShift);
-            $scope.attDates = angular.copy($scope.editAttDates);
-            $scope.attTimeIn = angular.copy($scope.editAttTimeIn);
-            $scope.attTimeOut = angular.copy($scope.editAttTimeOut);
-            $scope.attWorkDay = angular.copy($scope.editAttWorkDay);
-            $scope.attDay = angular.copy($scope.editAttDay);
-            $scope.attAbsDay = angular.copy($scope.editAttAbsDay);
-            $scope.attLate = angular.copy($scope.editAttLate);
-            $scope.attEL = angular.copy($scope.editAttEL);
-            $scope.attLeave = angular.copy($scope.editAttLeave);
-            $scope.attSL = angular.copy($scope.editAttSL);
-            $scope.attOThrs = angular.copy($scope.editAttOThrs);
-            $scope.attOT = angular.copy($scope.editAttOT);
+            $scope.schedName = angular.copy($scope.editSchedName);
+            $scope.schedDept = angular.copy($scope.editSchedDept);
+            $scope.schedShift = angular.copy($scope.editSchedShift);
+            $scope.schedDates = angular.copy($scope.editSchedDates);
+            $scope.schedTimed = angular.copy($scope.editSchedTimed);
+            $scope.schedWeeks = angular.copy($scope.editSchedWeeks);
 
         });
     }
@@ -322,7 +307,7 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     }
 
-    $scope.data = [{"name":"","department":"","shift":"","dates":"","time_in":"","time_out":"","lateness":""},{"name":"","department":"","shift":"","dates":"","time_in":"","time_out":"","lateness":""},{"name":"","department":"","shift":"","dates":"","time_in":"","time_out":"","lateness":""},{"name":"","department":"","shift":"","dates":"","time_in":"","time_out":"","lateness":""},{"name":"","department":"","shift":"","dates":"","time_in":"","time_out":"","lateness":""},{"name":"","department":"","shift":"","dates":"","time_in":"","time_out":"","lateness":""},{"name":"","department":"","shift":"","dates":"","time_in":"","time_out":"","lateness":""},{"name":"","department":"","shift":"","dates":"","time_in":"","time_out":"","lateness":""}];
+    $scope.data = [{"name":"","department":"","shift":"","dates":"","timed":"","weeks":""},{"name":"","department":"","shift":"","dates":"","timed":"","weeks":""},{"name":"","department":"","shift":"","dates":"","timed":"","weeks":""},{"name":"","department":"","shift":"","dates":"","timed":"","weeks":""},{"name":"","department":"","shift":"","dates":"","timed":"","weeks":""}];
           $scope.viewby = "10";
           $scope.totalItems = $scope.data.length;
           $scope.currentPage = 1;

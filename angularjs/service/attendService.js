@@ -5,7 +5,9 @@ ndmApp.factory('attendService', function($http,$q,$window) {
 		getAllAttendance: getAllAttendance,
 		editAttendee: editAttendee,
 		delAttendee: delAttendee,
-		updateAttendance: updateAttendance
+		updateAttendance: updateAttendance,
+		deptAttendee: deptAttendee,
+		getDepartmentAtendance: getDepartmentAtendance
 	 };
 	 return apiRouter;
 
@@ -23,6 +25,27 @@ ndmApp.factory('attendService', function($http,$q,$window) {
 		return $http({
 			method: 'get',
 			url: rootURL + '/attendance/item/' + id,
+			headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+		})
+	}
+
+	function deptAttendee() {
+		return $http({
+			method: 'post',
+			url: rootURL + '/attendance/dataDept/',
+			data: $.param({department: department}),
+			headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+		})
+	}
+
+	function getDepartmentAtendance() {
+		return $http({
+			method: 'get',
+			url: rootURL + '/getDepartmentAtendance/',
 			headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }

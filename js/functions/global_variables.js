@@ -1,4 +1,4 @@
 /*** General Global Variable ***/
-var rootURL = "/NDM/Builders/api/public";
+var rootURL = "/NDMCopy/Builders/api/public";
 /*** Login Part ***/
-var indexURL = "/NDM/Builders"; 
+var indexURL = "/NDMCopy/Builders"; 

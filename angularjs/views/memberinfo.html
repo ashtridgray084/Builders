@@ -5,90 +5,105 @@
     <div class="col-md-8">
       <div class="card mb-3">
         <div class="card-body">
-          <h6 class="card-title mb-1 large">
-          
-          
-          <label class="btn btn-primary pull-right" name="editInfo"><input type="checkbox" class="hidden" for="editInfo" name="editInfo" ng-model="editInfo"> <ic class="fa fa-pencil"></i></label>
-          <br/><br/>
-          <form name="myForm" ng-submit="register()"  >
-            <div class="form-group" ng-repeat="user in memberInfo | filter: username" style="list-style: none;">
+
+          <form name="myForm">
+            <div class="form-group" ng-repeat="user in memberInfo | filter: username">
+                
+                <div class="form-row pull-right">
+                  <label class="btn btn-primary pull-right" name="editInfo">
+                    <input type="checkbox" class="hidden" for="editInfo" name="editInfo" ng-model="editInfo"> <i class="fa fa-pencil" ng-click="loadUserInfo(user.userID,user.email,user.first_name,user.last_name,user.middle_name,user.age,user.gender,user.status,user.phone,user.nationality,user.birthdate,user.address)"></i>
+                  </label>
+                </div><br/><br/>
+                <!-- <div class="form-row">
+                  <a data-toggle="modal" data-target="#userInfoModal">
+                    <h4>{{user.last_name}}, {{user.first_name}} {{user.middle_name}}.</h4>
+                  </a>
+                </div> -->
                 <div class="form-row">
-                  <div class="col-md-6"><br/>
+                  <div class="col-md-6">
                     <label>Role : </label>
                     <input type="text" class="form-control" name="role" ng-model="usertype" readonly>
                   </div>
-                  <div class="col-md-6"><br/>
-                    <label>Email : </label>
-                    <input type="email" class="form-control" name="email" value="{{user.email}}" ng-readonly="!editInfo">
+                  <div class="col-md-6">
+                    <label>*Email : </label>
+                    <input type="hidden" class="form-control" name="userID" ng-value="user.userID">
+                    <input type="email" class="form-control" name="email" ng-value="user.email" ng-model="mailEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*Firstname : </label>
+                    <input type="text" class="form-control" name="fname" ng-value="user.first_name" ng-model="fnameEdit"  ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*LastName : </label>
+                    <input type="text" class="form-control" name="lname" ng-value="user.last_name" ng-model="lnameEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*MiddleName : </label>
+                    <input type="text" class="form-control" name="mname" ng-value="user.middle_name" ng-model="mnameEdit" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Age : </label>
+                    <input type="text" class="form-control" name="age" ng-value="user.age" ng-model="ageEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*Gender : </label>
+                    <input type="text" class="form-control" name="gender" ng-value="user.gender" ng-model="genderEdit" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Status : </label>
+                    <input type="text" class="form-control" name="status" ng-value="user.status" ng-model="statusEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*Phone Number : </label>
+                    <input id="txtNo" type="input" class="form-control" name="numeric" ng-value="user.phone" ng-model="phoneEdit" min="1" max="9" maxlength="11" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Nationality : </label>
+                    <input type="text" class="form-control" name="nationality" ng-value="user.nationality" ng-model="citizenEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*Birthdate : </label>
+                    <input type="date" class="form-control" name="birthday" ng-value="user.birthdate" ng-model="bdayEdit" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Home Address : </label>
+                    <input rows="2" cols="25" class="form-control" style="border-radius: 5px; height: 50px;" ng-value="user.address" ng-model="addrEdit" ng-readonly="!editInfo"></textarea>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-6"><br/>
-                    <label>Age : </label>
-                    <input type="text" class="form-control" name="fnameDisplay" value="{{user.age}}" ng-readonly="!editInfo">
-                  </div>
-                  <div class="col-md-6"><br/>
-                    <label>Gender : </label>
-                    <input type="text" class="form-control" name="gender" value="{{user.gender}}" ng-readonly="!editInfo">
+                  <div class="col-md-12"><br/>
+                    <button type="submit" class="btn btn-primary pull-right" ng-click="editMember(userIDEdit,mailEdit,fnameEdit,lnameEdit,mnameEdit,ageEdit,genderEdit,statusEdit,phoneEdit,citizenEdit,bdayEdit,addrEdit)" ng-show="editInfo"><i class="fa fa-save"></i> Save Update</button>
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="col-md-6"><br/>
-                    <label>Status : </label>
-                    <input type="text" class="form-control" name="status" value="{{user.status}}" ng-readonly="!editInfo">
-                  </div>
-                  <div class="col-md-6"><br/>
-                    <label>Nationality : </label>
-                    <input type="text" class="form-control" name="nationality" value="{{user.nationality}}" ng-readonly="!editInfo">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-md-6"><br/>
-                    <label>Birthdate : </label>
-                    <input type="date" class="form-control" name="birthday" value="{{user.birthdate}}" ng-readonly="!editInfo">
-                  </div>
-                  <div class="col-md-6"><br/>
-                    <label>Home Address : </label>
-                    <textarea rows="2" cols="25" class="form-control" style="border-radius: 5px; height: 50px;" ng-model="user.address" ng-readonly="!editInfo"></textarea>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-md-6"><br/>
-                    <label>Phone Number : </label>
-                    <input type="number" class="numbersOnly form-control" name="numeric" value="{{user.phone}}" min="1" max="9" maxlength="11" ng-pattern="/^\d{1-9}$/" ng-readonly="!editInfo">
-                  </div>
-                </div>
-
-                <button type="submit" class="col-md-2 btn btn-primary pull-right" ng-click="editMember(user.userID)" ng-show="editInfo"><i class="fa fa-save"></i> Save</button>
 
               </div>
-            <!-- <div class="form-group">
-              <label>SSS : </label>
-              <input type="text" class="form-control" name="sss" ng-model="sss" readonly>
-            </div>
-            <div class="form-group">
-              <label>TIN : </label>
-              <input type="text" class="form-control" name="tin" ng-model="tin" readonly>
-            </div> -->
-          </form>
-        </div>
-        <hr class="my-0">
-        <div class="card-body py-2 small">
-          <a class="mr-3 d-inline-block" href="#">
-          <i class="fa fa-fw fa-facebook"></i>
-          Facebook </a>
-          <a class="mr-3 d-inline-block" href="#">
-          <i class="fa fa-fw fa-envelope"></i>
-          Gmail </a>
-          <a class="d-inline-block" href="#">
-          <i class="fa fa-fw fa-yahoo"></i>
-          Yahoo! </a>
-        </div>
-        <div class="card-footer small text-muted">
-           Updated 1 hr ago
+            </form>
+
+          </div>
+          <!-- <hr class="my-0"> -->
+          <div class="card-body py-2 small">
+            <a class="mr-3 d-inline-block" href="#">
+            <i class="fa fa-fw fa-facebook"></i>
+            Facebook </a>
+            <a class="mr-3 d-inline-block" href="#">
+            <i class="fa fa-fw fa-envelope"></i>
+            Gmail </a>
+            <a class="d-inline-block" href="#">
+            <i class="fa fa-fw fa-yahoo"></i>
+            Yahoo! </a>
+          </div>
         </div>
       </div>
-    </div>
     <div class="col-md-4 pull-right">
       <div class="card mb-3">
         <div class="card-body">
@@ -119,3 +134,44 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Profile Name</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal" name="editForm" >
+        <div class="form-group">
+          <div class="form-row" style="text-align: center;">
+            <label for="nameField" class="col-xs-4 labelname">First Name: &nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <div class="col-xs-6">
+              <input type="hidden" class="form-control input-xs" ng-model="userIDEdit" />
+              <input type="text" class="form-control input-xs" value="{{user.first_name}}" />
+            </div>
+          </div><br/>
+          <div class="form-row" style="text-align: center;">
+            <label for="nameField" class="col-xs-4 labelname">Last Name: &nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <div class="col-xs-6">
+              <input type="text" class="form-control input-xs" value="{{user.last_name}}" />
+            </div>
+          </div><br/>
+          <div class="form-row" style="text-align: center;">
+            <label for="nameField" class="col-xs-4 labelname">Middle Name: &nbsp;</label>
+            <div class="col-xs-6">
+              <input type="text" class="form-control input-xs" value="{{user.middle_name}}" />
+            </div>
+          </div>
+          
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      <button type="button" class="btn btn-primary" ng-click="saveEditRole(userIDEdit,usernameEdit,usertypeEdit)" class="btn btn-secondary" data-dismiss="modal" href="#">Save</button>
+    </div>
+    </div>
+  </div>
+  </div>

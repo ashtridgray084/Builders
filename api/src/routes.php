@@ -287,6 +287,109 @@ $app->get('/{tablecode}/item/{id}', function ($request, $response, $args) {
   
 });
 
+//ALL Get Table by id
+$app->post('/{tablecode}/dataDept/', function ($request, $response, $args) {
+  $deptParams = $request->getParsedBody();
+  // $userListData = array(); 
+  $tb_code = $args['tablecode'];
+  $department = $deptParams['department'];
+  $dbLocal = $this->db_local;
+  $query = "";
+  
+  if($tb_code == "attendance") $query = "SELECT * FROM attendance_tbl WHERE department='$department'";
+  elseif($tb_code == "schedule") $query = "SELECT * FROM schedule_tbl WHERE department='$department'";
+  elseif($tb_code == "salary" ) $query ="SELECT * FROM salary_tbl WHERE department='$department'";
+  
+  
+  $stmt = $dbLocal->query($query);
+  $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+  echo json_encode($result);
+  
+});
+
+$app->post('/saveMemberInfo/', function ($request, $response, $args) {
+  $dbLocal = $this->db_local;
+  $updateMemberParams = $request->getParsedBody();
+  $userID = $updateMemberParams['userID'];
+  $fname = $updateMemberParams['fname'];
+  $lname = $updateMemberParams['lname'];
+  $mname = $updateMemberParams['mname'];
+  $age = $updateMemberParams['age'];
+  $gender = $updateMemberParams['gender'];
+  $status = $updateMemberParams['status'];
+  $birthdate = $updateMemberParams['birthdate'];
+  $nationality = $updateMemberParams['nationality'];
+  $address = $updateMemberParams['address'];
+  $phone = $updateMemberParams['phone'];
+  $email = $updateMemberParams['email'];
+  $username = $updateMemberParams['username'];
+
+  if($username == 'same_value'){
+    //Check whether the query was successful or not in updating data
+    $stmt = $dbLocal->prepare("UPDATE BK_User_Profile SET email = :email, first_name = :fname, last_name = :lname, middle_name = :mname, age = :age, gender = :gender, status = :status, phone = :phone, nationality =  :nationality, birthdate = :birthdate, address = :address WHERE userID = :userID");
+      $stmt->bindParam(':userID', $userID);
+      $stmt->bindParam(':email', $email);
+      $stmt->bindParam(':fname', $fname);
+      $stmt->bindParam(':lname', $lname);
+      $stmt->bindParam(':mname', $mname);
+      $stmt->bindParam(':age', $age);
+      $stmt->bindParam(':gender', $gender);
+      $stmt->bindParam(':status', $status);
+      $stmt->bindParam(':phone', $phone);
+      $stmt->bindParam(':nationality', $nationality);
+      $stmt->bindParam(':birthdate', $birthdate);
+      $stmt->bindParam(':address', $address);
+
+    //Check whether the query was successful or not in updating data
+    if($stmt->execute()) {
+      echo "Success";
+    }else{
+      echo "Failed to save data to BK_User_Profile";
+    }
+  }else{
+    //Check duplicate username
+    $stmt = $dbLocal->prepare("SELECT * FROM BK_User WHERE Username = :username");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    if($stmt->rowCount() == -1) {
+      echo "Username " . $username . " already exists.\n";
+    }else{
+    // save data to db
+      // $stmt = $dbLocal->prepare("UPDATE BK_User_Profile SET first_name = :fname, middle_name = :mname, last_name =  :lname WHERE userID = :userID");
+      //   $stmt->bindParam(':userID', $userID);
+      //   $stmt->bindParam(':fname', $fname);
+      //   $stmt->bindParam(':mname', $mname);
+      //   $stmt->bindParam(':lname', $lname);
+      
+      //Check whether the query was successful or not in updating data
+      if($stmt->execute()) {
+        $stmt = $dbLocal->prepare("UPDATE BK_User_Profile SET email = :email, first_name = :fname, last_name = :lname, middle_name = :mname, age = :age, gender = :gender, status = :status, phone = :phone, nationality =  :nationality, birthdate = :birthdate, address = :address WHERE userID = :userID");
+      $stmt->bindParam(':userID', $userID);
+      $stmt->bindParam(':email', $email);
+      $stmt->bindParam(':fname', $fname);
+      $stmt->bindParam(':lname', $lname);
+      $stmt->bindParam(':mname', $mname);
+      $stmt->bindParam(':age', $age);
+      $stmt->bindParam(':gender', $gender);
+      $stmt->bindParam(':status', $status);
+      $stmt->bindParam(':phone', $phone);
+      $stmt->bindParam(':nationality', $nationality);
+      $stmt->bindParam(':birthdate', $birthdate);
+      $stmt->bindParam(':address', $address);
+    
+        //Check whether the query was successful or not in updating data
+        if($stmt->execute()) {
+          echo "Success";
+        }else{
+            echo "Failed to save data to BK_User_Profile";
+        }
+      }else{
+          echo "Failed to save data to BK_User table";
+      }
+    }
+  }
+});
 
 //Get User Info by ID
 // $app->get('/getUserInfo/{id}', function ($request, $response, $args) {
@@ -464,7 +567,7 @@ $app->post('/updateMemberInfo/', function ($request, $response, $args) {
       
       //Check whether the query was successful or not in updating data
       if($stmt->execute()) {
-        $stmt = $dbLocal->prepare("UPDATE BK_User_Profile SET first_name = :fname, middle_name = :mname, last_name =  :lname, age =  :age, gender =  :gender, status =  :status, nationality =  :nationality, address =  :address, phonenumber =  :phone, birthdate =  :birthdate, email = :email WHERE userID = :userID");
+        $stmt = $dbLocal->prepare("UPDATE BK_User_Profile SET first_name = :fname, middle_name = :mname, last_name =  :lname, age =  :age, gender =  :gender, status =  :status, nationality =  :nationality, address =  :address, phone =  :phone, birthdate =  :birthdate, email = :email WHERE userID = :userID");
         $stmt->bindParam(':userID', $userID);
         $stmt->bindParam(':fname', $fname);
         $stmt->bindParam(':mname', $mname);
@@ -731,37 +834,36 @@ $app->post('/delAllAttendee/', function ($request, $response, $args) {
 });
 
 //Get Attendee By ID
-// $app->get('/getSchedule/{id}', function ($request, $response, $args) {
-//   //access database $db_local to localDB
-//   $db = $this->db_local;
-//   //define parameter to get by ID
-//   $id = $args['id'];
-//   //make the list array to request
-//   $schedListData = array();
+$app->get('/getAllSchedule/', function ($request, $response, $args) {
+  //access database $db_local to localDB
+  $db = $this->db_local;
+  //define parameter to get by ID
+  // $id = $args['id'];
+  //make the list array to request
+  $schedListData = array();
 
-//   // prepare sql and bind parameters
-//   $stmt = $db->prepare("SELECT * FROM schedule_tbl WHERE userID=:id");
-//   $stmt->bindParam(':id', $id);
-//   $stmt->execute();
-//     //fetch the array response
-//     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//     //loop array in forEach
-//     foreach ($res as $row){
-//       //array the list of response
-//       $schedListData[] = array(
-//         "userID"      => $row['userID'],
-//         "name"        => $row['name'],
-//         "department"  => $row['department'],
-//         "shift"       => $row['shift'],
-//         "dates"       => $row['dates'],
-//         "timed"       => $row['timed'],
-//         "weeks"       => $row['weeks'],
-//         "usertype"    => $row['usertype']
-//       );
-//     }
-//     //display the output response
-//     echo json_encode($schedListData);
-// });
+  // prepare sql and bind parameters
+  $stmt = $db->prepare("SELECT * FROM schedule_tbl");
+  // $stmt->bindParam(':id', $id);
+  $stmt->execute();
+    //fetch the array response
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //loop array in forEach
+    foreach ($res as $row){
+      //array the list of response
+      $schedListData[] = array(
+        "userID"      => $row['userID'],
+        "name"        => $row['name'],
+        "department"  => $row['department'],
+        "shift"       => $row['shift'],
+        "dates"       => $row['dates'],
+        "timed"       => $row['timed'],
+        "weeks"       => $row['weeks']
+      );
+    }
+    //display the output response
+    echo json_encode($schedListData);
+});
 
 //Update Attendance by ID
 $app->post('/updateSchedule/', function ($request, $response, $args) {
@@ -1049,4 +1151,89 @@ $app->post('/delAllSalary/', function ($request, $response, $args) {
       echo "Main administrator cannot be deleted." . "\n";
     }
   }
+});
+
+$app->get('/getDepartmentAtendance/', function ($request, $response, $args) {
+  $dblocal = $this->db_local;
+  $profileParams = $request->getParsedBody();
+  $userTypeData = array();
+
+  // prepare sql and bind parameters
+  $stmt = $dblocal->prepare("SELECT DISTINCT department FROM attendance_tbl");
+  $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($res as $row){
+    $userTypeData[] = array(
+      "department"  => $row['department']
+        );
+  }
+  echo json_encode($userTypeData);
+});
+
+$app->get('/getDepartmentSchedule/', function ($request, $response, $args) {
+  $dblocal = $this->db_local;
+  $profileParams = $request->getParsedBody();
+  $userTypeData = array();
+
+  // prepare sql and bind parameters
+  $stmt = $dblocal->prepare("SELECT DISTINCT department FROM schedule_tbl");
+  $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($res as $row){
+    $userTypeData[] = array(
+      "department"  => $row['department']
+        );
+  }
+  echo json_encode($userTypeData);
+});
+
+$app->get('/getShift/', function ($request, $response, $args) {
+  $dblocal = $this->db_local;
+  $profileParams = $request->getParsedBody();
+  $userTypeData = array();
+
+  // prepare sql and bind parameters
+  $stmt = $dblocal->prepare("SELECT DISTINCT shift FROM schedule_tbl");
+  $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($res as $row){
+    $userTypeData[] = array(
+      "shift"  => $row['shift']
+        );
+  }
+  echo json_encode($userTypeData);
+});
+
+$app->get('/getTime/', function ($request, $response, $args) {
+  $dblocal = $this->db_local;
+  $profileParams = $request->getParsedBody();
+  $userTypeData = array();
+
+  // prepare sql and bind parameters
+  $stmt = $dblocal->prepare("SELECT DISTINCT timed FROM schedule_tbl");
+  $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($res as $row){
+    $userTypeData[] = array(
+      "shift"  => $row['shift']
+        );
+  }
+  echo json_encode($userTypeData);
+});
+
+$app->get('/getWeeks/', function ($request, $response, $args) {
+  $dblocal = $this->db_local;
+  $profileParams = $request->getParsedBody();
+  $userTypeData = array();
+
+  // prepare sql and bind parameters
+  $stmt = $dblocal->prepare("SELECT DISTINCT weeks FROM schedule_tbl");
+  $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($res as $row){
+    $userTypeData[] = array(
+      "shift"  => $row['shift']
+        );
+  }
+  echo json_encode($userTypeData);
 });
