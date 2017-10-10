@@ -308,6 +308,27 @@ $app->post('/{tablecode}/dataDept/', function ($request, $response, $args) {
   
 });
 
+$app->post('/{tablecode}/deptAtendee/', function ($request, $response, $args) {
+  $deptParams = $request->getParsedBody();
+  // $userListData = array(); 
+  $tb_code = $args['tablecode'];
+  $department = $deptParams['department'];
+  $userID = $deptParams['userID'];
+  $dbLocal = $this->db_local;
+  $query = "";
+  
+  if($tb_code == "attendance") $query = "SELECT * FROM attendance_tbl WHERE department='$department' AND userID=$userID";
+  elseif($tb_code == "schedule") $query = "SELECT * FROM schedule_tbl WHERE department='$department' AND userID=$userID";
+  elseif($tb_code == "salary" ) $query ="SELECT * FROM salary_tbl WHERE department='$department' AND userID=$userID";
+  
+  
+  $stmt = $dbLocal->query($query);
+  $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+  echo json_encode($result);
+  
+});
+
 $app->post('/saveMemberInfo/', function ($request, $response, $args) {
   $dbLocal = $this->db_local;
   $updateMemberParams = $request->getParsedBody();
@@ -619,6 +640,28 @@ $app->delete('/delUser/{id}', function ($request, $response, $args){
     }
 });
 
+// $app->post('/delAllMember/', function ($request, $response, $args) {
+//   $dbLocal = $this->db_local;
+//   $delMemberParams = $request->getParsedBody();
+//   foreach ($delMemberParams['uDel'] as $value1 && $delMemberParams['uDel'] as $value2 && $delMemberParams['uDel'] as $value3) {
+//     if($value1 != 1 && $value2 != 1 && $value3 != 1){
+//       $stmt1 = $dbLocal->prepare("DELETE FROM bk_user WHERE userID=:id");
+//       $stmt2 = $dbLocal->prepare("DELETE FROM bk_user_access WHERE userID=:id");
+//       $stmt3 = $dbLocal->prepare("DELETE FROM bk_user_profile WHERE userID=:id");
+//       $stmt1->bindParam(':userID', $value1);
+//       $stmt2->bindParam(':userID', $value2);
+//       $stmt3->bindParam(':userID', $value3);
+
+//       if($stmt1->execute() && $stmt2->execute() && $stmt3->execute()){
+//         echo "Success" . "\n";
+//       }else{
+//         echo "Failed" . "\n";
+//       }
+//     }else{
+//       echo "Main administrator cannot be deleted." . "\n";
+//     }
+//   }
+// });
 
 /***** Attendance API ******/
 //get All Attendees in List
@@ -953,7 +996,7 @@ $app->post('/delAllSchedule/', function ($request, $response, $args) {
   // $dbLocal = $this->db_local;
   $dbLocal = $this->db_local;
   $delSchedParams = $request->getParsedBody();
-  foreach ($delSchedParams['userDel'] as $value) {
+  foreach ($delSchedParams['schedDel'] as $value) {
     if($value != 1){
       // $stmt1 = $dbLocal->prepare("DELETE FROM BK_User WHERE userID = :userID");
       $stmt1 = $dbLocal->prepare("DELETE FROM schedule_tbl WHERE userID=:userID");
@@ -1215,7 +1258,7 @@ $app->get('/getTime/', function ($request, $response, $args) {
     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
   foreach ($res as $row){
     $userTypeData[] = array(
-      "shift"  => $row['shift']
+      "time"  => $row['timed']
         );
   }
   echo json_encode($userTypeData);
@@ -1232,7 +1275,7 @@ $app->get('/getWeeks/', function ($request, $response, $args) {
     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
   foreach ($res as $row){
     $userTypeData[] = array(
-      "shift"  => $row['shift']
+      "weeks"  => $row['weeks']
         );
   }
   echo json_encode($userTypeData);

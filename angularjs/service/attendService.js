@@ -31,7 +31,7 @@ ndmApp.factory('attendService', function($http,$q,$window) {
 		})
 	}
 
-	function deptAttendee() {
+	function deptAttendee(department) {
 		return $http({
 			method: 'post',
 			url: rootURL + '/attendance/dataDept/',
