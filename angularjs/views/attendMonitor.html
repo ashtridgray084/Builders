@@ -31,23 +31,16 @@
               <thead>
                 <tr>
                   <th class=""><input type="checkbox" name="select" id="checkAll" ng-model="item.selectedAll" ng-click="checkAll();" /> </th>
-                  <th ng-click="sort('name')">Name <i class="fa sort-icon" ng-show="sortKey=='name'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></i></th>
                   <th ng-click="sort('department')">Department <span class="fa sort-icon" ng-show="sortKey=='department'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
-                  <!-- <th ng-click="sort('shift')">Shift <span class="fa sort-icon" ng-show="sortKey=='shift'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
-                  <th ng-click="sort('dates')">Date <span class="fa sort-icon" ng-show="sortKey=='dates'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
-                  <th ng-click="sort('time_in')">Time In <span class="fa sort-icon" ng-show="sortKey=='time_in'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
-                  <th ng-click="sort('time_out')">Time Out <span class="fa sort-icon" ng-show="sortKey=='time_out'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
-                  <th ng-click="sort('lateness')">Late<span class="fa sort-icon" ng-show="sortKey=='lateness'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th> -->
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr dir-paginate="item in deptAttendanceList |orderBy:sortKey:reverse|filter: search |itemsPerPage:5">
                   <td><input type="checkbox" name="select" value="checked" ng-model="item.selected" ng-click="selectToDel(item.selected,item.userID)" /> </td>
-                  <td>{{ item.name }}</td>
                   <td>{{ item.department }}</td>
                   <td>
-                    <button class="btn btn-success fa fa-pencil" id="editbutton" ng-click="editAttendee(item.userID)"></button><br /><br />
+                    <button class="btn btn-success fa fa-pencil" id="editbutton" ng-click="deptAttEmployed(item.department)"></button><br /><br />
                   </td>
                 </tr>
               </tbody>
@@ -72,6 +65,8 @@
                 <label class="col-md-10">Shift: {{attShift}}</label>
               </div>
             </div>
+              <button type="submit" class="btn btn-primary pull-left" ng-click="printDiv('divToPrint')">Print Attendance <i class="fa fa-print"></i></button>
+
               <button class="btn btn-primary pull-right" ng-click="cancelEdit()"><i class="fa fa-mail-reply"></i></button>
             
             <br /><br />
@@ -83,8 +78,8 @@
                 <input type="Input" name="" value="{{attTimeIn}}" style="width: 50px;">
                 <label>Time Out: </label>
                 <input type="Input" name="" value="{{attTimeOut}}" style="width: 50px;"> -->
-                <div class="table-responsive" style="overflow-x: auto;">
-            <table class="table table-bordered table-stripped" >
+                <div class="table-responsive" name="divToPrint" id="divToPrint" style="overflow-x: auto;">
+            <table class="table table-bordered table-stripped" id="printTable">
               <thead>
                 <tr>
                   <th class=""><input type="checkbox" name="select" id="checkAll" ng-model="item.selectedAll" ng-click="checkAll();" /> </th>
@@ -95,11 +90,10 @@
                   <th ng-click="sort('time_in')">Time In <span class="fa sort-icon" ng-show="sortKey=='time_in'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
                   <th ng-click="sort('time_out')">Time Out <span class="fa sort-icon" ng-show="sortKey=='time_out'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
                   <th ng-click="sort('lateness')">Late<span class="fa sort-icon" ng-show="sortKey=='lateness'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
-                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr dir-paginate="item in deptAttendanceList |orderBy:sortKey:reverse|filter: search |itemsPerPage:5">
+                <tr dir-paginate="item in deptAttend |orderBy:sortKey:reverse|filter: search |itemsPerPage:5">
                   <td><input type="checkbox" name="select" value="checked" ng-model="item.selected" ng-click="selectToDel(item.selected,item.userID)" /> </td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.department }}</td>
@@ -107,9 +101,7 @@
                   <td>{{ item.dates }}</td>
                   <td>{{ item.time_in }}</td>
                   <td>{{ item.time_out }}</td>
-                  <td>
-                    <button class="btn btn-success fa fa-pencil" id="editbutton" ng-click="editAttendee(item.userID)"></button><br /><br />
-                  </td>
+                  <td>{{ item.lateness }}</td>
                 </tr>
               </tbody>
             </table>
@@ -138,8 +130,6 @@
                 </table> -->
               </div>
               <div class="col-xs-12">
-              <br/>
-                <button type="submit" class="btn btn-primary pull-right" ng-click="">Save</button>
               </div>
             </div>
 

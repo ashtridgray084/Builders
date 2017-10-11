@@ -21,17 +21,95 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
             console.log( $scope.attendanceList);
         });
 
-    attendService.deptAttendee()
-        .then(function(data){
-            $scope.deptAttend = data.data;
-            console.log( $scope.deptAttend);
-        });
 
     attendService.getDepartmentAtendance()
         .then(function(data){
             $scope.deptAttendanceList = data.data;
             console.log( $scope.deptAttendanceList);
         });
+
+
+    $scope.deptAttEmployed= function(department){
+        $scope.activepage = 'edit';
+        
+        attendService.deptAttendee(department)
+        .then(function(data){
+            $scope.deptAttend = data.data;
+            console.log( $scope.deptAttend);
+
+            $scope.attID = data.data[0].id;
+            $scope.attuID = data.data[0].userID;
+            $scope.attName = data.data[0].name;
+            $scope.attDept = data.data[0].department;
+            $scope.attShift = data.data[0].shift;
+            $scope.attDates = data.data[0].dates;
+            $scope.attTimeIn = data.data[0].time_in;
+            $scope.attTimeOut = data.data[0].time_out;
+            $scope.attWorkDay = data.data[0].workday;
+            $scope.attDay = data.data[0].attend_day;
+            $scope.attAbsDay = data.data[0].absence_day;
+            $scope.attLate = data.data[0].lateness;
+            $scope.attEL = data.data[0].early_leave;
+            $scope.attLeave = data.data[0].leaved;
+            $scope.attSL = data.data[0].sickleave;
+            $scope.attOThrs = data.data[0].ot_hrs;
+            $scope.attOT = data.data[0].ot;
+
+            // Edit Values
+            $scope.editAttID = data.data[0].id;
+            $scope.editAttuID = data.data[0].userID;
+            $scope.editAttName = data.data[0].name;
+            $scope.editAttDept = data.data[0].department;
+            $scope.editAttShift = data.data[0].shift;
+            $scope.editAttDates = data.data[0].dates;
+            $scope.editAttTimeIn = data.data[0].time_in;
+            $scope.editAttTimeOut = data.data[0].time_out;
+            $scope.editAttWorkDay = data.data[0].workday;
+            $scope.editAttDay = data.data[0].attend_day;
+            $scope.editAttAbsDay = data.data[0].absence_day;
+            $scope.editAttLate = data.data[0].lateness;
+            $scope.editAttEL = data.data[0].early_leave;
+            $scope.editAttLeave = data.data[0].leaved;
+            $scope.editAttSL = data.data[0].sickleave;
+            $scope.editAttOThrs = data.data[0].ot_hrs;
+            $scope.editAttOT = data.data[0].ot;
+
+            $scope.orgValArr = {
+                name: $scope.attName,
+                department: $scope.attDept,
+                shift: $scope.attShift,
+                dates: $scope.attDates,
+                time_in: $scope.attTimeIn,
+                time_out: $scope.attTimeOut,
+                workday: $scope.attWorkDay,
+                attend_day: $scope.attDay,
+                absence_day: $scope.attAbsDay,
+                lateness: $scope.attLate,
+                early_leave: $scope.attEL,
+                leaved: $scope.attLeave,
+                sickleave: $scope.attSL,
+                ot_hrs: $scope.attOThrs,
+                ot: $scope.attOT
+            };
+            
+            $scope.attName = angular.copy($scope.editAttName);
+            $scope.attDept = angular.copy($scope.editAttDept);
+            $scope.attShift = angular.copy($scope.editAttShift);
+            $scope.attDates = angular.copy($scope.editAttDates);
+            $scope.attTimeIn = angular.copy($scope.editAttTimeIn);
+            $scope.attTimeOut = angular.copy($scope.editAttTimeOut);
+            $scope.attWorkDay = angular.copy($scope.editAttWorkDay);
+            $scope.attDay = angular.copy($scope.editAttDay);
+            $scope.attAbsDay = angular.copy($scope.editAttAbsDay);
+            $scope.attLate = angular.copy($scope.editAttLate);
+            $scope.attEL = angular.copy($scope.editAttEL);
+            $scope.attLeave = angular.copy($scope.editAttLeave);
+            $scope.attSL = angular.copy($scope.editAttSL);
+            $scope.attOThrs = angular.copy($scope.editAttOThrs);
+            $scope.attOT = angular.copy($scope.editAttOT);
+
+        });
+    }
 
     $scope.attendList = function(){        
         $rootScope.loader = true;
@@ -44,7 +122,7 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
     }
 
     $scope.editAttendee = function(id){
-        $scope.activepage = 'edit';
+        
         // $scope.MainID = id;
         // $scope.attID = userID;
         // $scope.attName = name;
@@ -229,6 +307,15 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
         
     // }
 
+    
+$scope.printDiv = function(divToPrint) {
+  var printContents = document.getElementById('divToPrint').innerHTML;
+  var popupWin = window.open('', '_blank', 'width=300,height=300');
+  popupWin.document.open();
+  popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
+  popupWin.document.close();
+}
+
     // Delete User List
     var deleteArray=[];
     $scope.selectToDel = function(selected,userID){
@@ -253,14 +340,14 @@ ndmApp.controller('attendCtrl', function($scope, $window, $rootScope, attendServ
         } else {
             $scope.selectedAll = false;
         }
-        angular.forEach($scope.attendanceList, function(userList) {
-            userList.selected = $scope.selectedAll;
+        angular.forEach($scope.deptAttendanceList, function(userList) {
+            deptAttendanceList.selected = $scope.selectedAll;
             if($scope.selectedAll == true){
-                if (deleteArray.indexOf(attendanceList.userID) == -1) {
-                    deleteArray.push(attendanceList.userID);
+                if (deleteArray.indexOf(deptAttendanceList.userID) == -1) {
+                    deleteArray.push(deptAttendanceList.userID);
                 }
             }else{
-                var index = deleteArray.indexOf(attendanceList.userID);
+                var index = deleteArray.indexOf(deptAttendanceList.userID);
                 if (index > -1) {
                     deleteArray.splice(index, 1);
                 }

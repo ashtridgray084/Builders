@@ -8,7 +8,8 @@ ndmApp.factory('adminService', function($http,$q,$window) {
 		getUserType: getUserType,
 		getProfile: getProfile,
 		getAllUserInfo: getAllUserInfo,
-		saveMemberInfo: saveMemberInfo
+		saveMemberInfo: saveMemberInfo,
+		delMember: delMember
 	 };
 	 return apiRouter;
 	  
@@ -118,6 +119,17 @@ ndmApp.factory('adminService', function($http,$q,$window) {
 				address: address,
 				username: username
 			}),
+			headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+		})
+	}
+
+	function delMember(userDel) {
+		return $http({
+			method: 'post',
+			url: rootURL + '/delAllMember/',
+			data: $.param({userDel: userDel}),
 			headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }

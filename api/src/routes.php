@@ -643,22 +643,20 @@ $app->delete('/delUser/{id}', function ($request, $response, $args){
 // $app->post('/delAllMember/', function ($request, $response, $args) {
 //   $dbLocal = $this->db_local;
 //   $delMemberParams = $request->getParsedBody();
-//   foreach ($delMemberParams['uDel'] as $value1 && $delMemberParams['uDel'] as $value2 && $delMemberParams['uDel'] as $value3) {
-//     if($value1 != 1 && $value2 != 1 && $value3 != 1){
-//       $stmt1 = $dbLocal->prepare("DELETE FROM bk_user WHERE userID=:id");
-//       $stmt2 = $dbLocal->prepare("DELETE FROM bk_user_access WHERE userID=:id");
-//       $stmt3 = $dbLocal->prepare("DELETE FROM bk_user_profile WHERE userID=:id");
-//       $stmt1->bindParam(':userID', $value1);
-//       $stmt2->bindParam(':userID', $value2);
-//       $stmt3->bindParam(':userID', $value3);
-
-//       if($stmt1->execute() && $stmt2->execute() && $stmt3->execute()){
+//   foreach ($delMemberParams['userDel'] as $value) {
+//     if($value != 1){
+//       $stmt = $dbLocal->prepare("DELETE FROM bk_user WHERE userID=:id");
+//       $stmt->bindParam(':userID', $value);
+//       $stmt = $dbLocal->prepare("DELETE FROM bk_user_access WHERE accessID=:id");
+//       $stmt->bindParam(':accessID', $value);
+//       $stmt = $dbLocal->prepare("DELETE FROM bk_user_profile WHERE profileID=:id");
+//       $stmt->bindParam(':profileID', $value);
+      
+//       if($stmt->execute()){
 //         echo "Success" . "\n";
 //       }else{
 //         echo "Failed" . "\n";
 //       }
-//     }else{
-//       echo "Main administrator cannot be deleted." . "\n";
 //     }
 //   }
 // });

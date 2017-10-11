@@ -1,5 +1,5 @@
 <div class="container" id="usersett"><br />
-	<ol class="breadcrumb">
+  <ol class="breadcrumb">
     <li class="breadcrumb-item">
     <a href="#/"><i class="fa fa-home"></i></a>
     </li>
@@ -8,50 +8,156 @@
     </li>
     </ol>
 
-	 <div class="card mb-3">
+   <div class="card mb-3">
           <div class="card-header">
             <i class="fa fa-table"></i>
             List of Employees
           </div>
           <div class="card-body">
 
-            <!-- <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="btn btn-primary active" data-toggle="tab" data-target="#member_tab" ng-click="">Members List</a>
-            </li>
-
-            <li class="nav-item">
-              <a  class="btn " role="tab" data-toggle="tab" data-target="#attend_tab">Attendance Monitoring</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="btn " role="tab" data-toggle="tab" data-target="#sched_tab">Scheduled</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="btn " role="tab" data-toggle="tab" data-target="#payroll_tab">Payroll</a>
-            </li>
-          </ul> -->
-
           <ul class="nav nav-pills">
             <li class="active"><a class="btn" data-toggle="pill" data-target="#member_tab"  >Member List</a></li>
-            <li class=""><a class="btn" data-toggle="pill" data-target="#attend_tab" >Attendance</a></li>
-            <li class=""><a class="btn" data-toggle="pill" data-target="#sched_tab" >Schedule</a></li>
-            <li class=""><a class="btn" data-toggle="pill" data-target="#payroll_tab" >Payroll</a></li>
           </ul>
 
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="member_tab">
-              <h1>Member Data</h1>
+              
+              <div class="" ng-show="activepage=='main'" ><br/>
+
+          <div class="form-group">
+            <div class="form-row col-md-12">
+              <div class="input-group col-sm-4"> 
+                <span class="input-group-addon btn-pink"><i class="fa fa-search fa-fw"></i></span><input type="text" class="form-control" name="search" id="search" ng-model="search" placeholder="Search Employee Name" />
+              </div>
+              <button class="btn btn-primary pull-right deleteall" type="button" value="Remove"><i class="fa fa-trash-o"></i> </span></button>
+            </div>
+            
+          </div>
+          <br />          
+          <div class="table-responsive" style="overflow-x: auto;">
+            <table class="table table-bordered table-stripped" >
+              <thead>
+                <tr>
+                  <th class=""><input type="checkbox" name="select" id="checkAll" ng-model="item.selectedAll" ng-click="checkAll();" /> </th>
+                  <th ng-click="sort('name')">Full Name <i class="fa sort-icon" ng-show="sortKey=='name'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></i></th>
+                  <th ng-click="sort('department')">Email Address<span class="fa sort-icon" ng-show="sortKey=='department'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
+                  <th ng-click="sort('shift')">Birthdate <span class="fa sort-icon" ng-show="sortKey=='shift'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
+                  <th ng-click="sort('dates')">Phone Number <span class="fa sort-icon" ng-show="sortKey=='dates'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
+                  <th ng-click="sort('time_in')">Address <span class="fa sort-icon" ng-show="sortKey=='time_in'" ng-class="{'fa-sort-up':reverse,'fa-sort-down':!reverse}"></th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr dir-paginate="item in memberInfoList |orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+                  <td><input type="checkbox" name="select" value="checked" ng-model="item.selected" ng-click="selectToDel(item.selected,item.userID)" /> </td>
+                  <td>{{ item.first_name }} {{ item.middle_name }} {{ item.last_name }}</td>
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.birthdate }}</td>
+                  <td>{{ item.phone }}</td>
+                  <td>{{ item.address }}</td>
+                  <td>
+                    <a class="btn btn-success fa fa-pencil" id="editbutton" ng-click="editMemberInfo(item.userID)"></a><br /><br />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <dir-pagination-controls
+              max-size="5"
+              direction-links="true"
+              boundary-links="true" >
+            </dir-pagination-controls>
+          </div> 
+
+        </div>
+
+        <div ng-show="activepage=='edit'">
+          <form name="myForm">
+            <div class="form-group" ng-repeat="user in memberInfo | filter: username">
+                
+                <div class="form-row pull-right">
+                  <label class="btn btn-primary pull-right" name="editInfo">
+                    <input type="checkbox" class="hidden" for="editInfo" name="editInfo" ng-model="editInfo"> <i class="fa fa-pencil" ng-click="loadUserInfo(user.userID,user.email,user.first_name,user.last_name,user.middle_name,user.age,user.gender,user.status,user.phone,user.nationality,user.birthdate,user.address)"></i>
+                  </label>
+                </div><br/><br/>
+                <!-- <div class="form-row">
+                  <a data-toggle="modal" data-target="#userInfoModal">
+                    <h4>{{user.last_name}}, {{user.first_name}} {{user.middle_name}}.</h4>
+                  </a>
+                </div> -->
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>Role : </label>
+                    <input type="text" class="form-control" name="role" ng-model="usertype" readonly>
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Email : </label>
+                    <input type="hidden" class="form-control" name="userID" ng-value="user.userID">
+                    <input type="email" class="form-control" name="email" ng-value="user.email" ng-model="mailEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*Firstname : </label>
+                    <input type="text" class="form-control" name="fname" ng-value="user.first_name" ng-model="fnameEdit"  ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*LastName : </label>
+                    <input type="text" class="form-control" name="lname" ng-value="user.last_name" ng-model="lnameEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*MiddleName : </label>
+                    <input type="text" class="form-control" name="mname" ng-value="user.middle_name" ng-model="mnameEdit" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Age : </label>
+                    <input type="text" class="form-control" name="age" ng-value="user.age" ng-model="ageEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*Gender : </label>
+                    <input type="text" class="form-control" name="gender" ng-value="user.gender" ng-model="genderEdit" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Status : </label>
+                    <input type="text" class="form-control" name="status" ng-value="user.status" ng-model="statusEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*Phone Number : </label>
+                    <input id="txtNo" type="input" class="form-control" name="numeric" ng-value="user.phone" ng-model="phoneEdit" min="1" max="9" maxlength="11" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Nationality : </label>
+                    <input type="text" class="form-control" name="nationality" ng-value="user.nationality" ng-model="citizenEdit" ng-readonly="!editInfo">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>*Birthdate : </label>
+                    <input type="date" class="form-control" name="birthday" ng-value="user.birthdate" ng-model="bdayEdit" ng-readonly="!editInfo">
+                  </div>
+                  <div class="col-md-6">
+                    <label>*Home Address : </label>
+                    <input rows="2" cols="25" class="form-control" style="border-radius: 5px; height: 50px;" ng-value="user.address" ng-model="addrEdit" ng-readonly="!editInfo"></textarea>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12"><br/>
+                    <button type="submit" class="btn btn-primary pull-right" ng-click="editMember(userIDEdit,mailEdit,fnameEdit,lnameEdit,mnameEdit,ageEdit,genderEdit,statusEdit,phoneEdit,citizenEdit,bdayEdit,addrEdit)" ng-show="editInfo"><i class="fa fa-save"></i> Save Update</button>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+        </div>
+
             </div>
             <div role="tabpanel" class="tab-pane fade" id="attend_tab">
               <h1>Attendance Data</h1>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="sched_tab">
-              <h1>Schedule Data</h1>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="payroll_tab">
-              <h1>Payroll Data</h1>
             </div>
           </div>
           
@@ -297,9 +403,6 @@
             
           </div> -->
 
-          </div>
-          <div class="card-footer small text-muted">
-            Updated yesterday at 11:59 PM
           </div>
         </div>
   

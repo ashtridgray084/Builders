@@ -155,7 +155,7 @@ ndmApp.controller('mainCtrl', function($scope, $window, $rootScope, adminService
         });
     }
 
-     $scope.saveEditRole = function(uID,uname,utype){
+    $scope.saveEditRole = function(uID,uname,utype){
         var username = uname;
         var usertype = utype;
         if(uname==$scope.usernameOrig){
@@ -166,19 +166,18 @@ ndmApp.controller('mainCtrl', function($scope, $window, $rootScope, adminService
         }
         $rootScope.loader = true;
         adminService.saveEditRole(uID,username,usertype)
-            .then(function(data){
-                alert(data.data);
-                if(data.data == "Success"){
-                    adminService.getUserList()
-                        .then(function(data){
-                            $scope.userList = data.data;
-                            $rootScope.loader = false;
-                        });
-                }else{
-                    $rootScope.loader = false;
-                }
-            });
-
+        .then(function(data){
+            alert(data.data);
+            if(data.data == "Success"){
+                adminService.getUserList()
+                    .then(function(data){
+                        $scope.userList = data.data;
+                        $rootScope.loader = false;
+                    });
+            }else{
+                $rootScope.loader = false;
+            }
+        });
     }
     
     $('.test-input').unbind('keyup change input paste').bind('keyup change input paste',function(e){
